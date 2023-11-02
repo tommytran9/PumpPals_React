@@ -1,0 +1,84 @@
+/* Define variables for reusability */
+$primary-color: #007bff;
+$secondary-color: #333;
+
+$background: #121735;
+$text-color: #41a38a;
+$file-hover-color: #182b54;
+
+.content_container {
+    width: 100%;
+    height: 100vh;
+    background-color: $background;
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .top_bar{
+        width: 100%;
+        color: white;
+        position: absolute;
+        top: 0;
+        z-index: 999;
+    }
+
+    .dir_container {
+        background-color: $background;
+
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+        overflow-y: scroll;
+        justify-content: space-between;
+
+        .file{
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: 15%;
+
+            &:hover{
+                cursor: pointer;
+                svg{
+                    fill: rgba($text-color, 0.3);
+    
+                    path{
+                        fill: rgba($text-color, 0.3);
+                    }
+                }
+                .filename{
+                    opacity: 1;
+                }
+            }
+
+            .filename{
+                text-align: center;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 100%;
+                color: $text-color;
+                font-weight: bold;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+                overflow: hidden;
+                white-space: nowrap;
+                opacity: 0.7;
+            }
+            
+            svg{
+                
+                transition: fill 0.5s ease-in;
+                fill: $background;
+
+                path{
+                    transition: fill 0.25s ease-out;
+                    fill: $background;
+                }
+            }
+        }
+        
+    }
+}

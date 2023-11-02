@@ -1,24 +1,23 @@
-import { Routes, Route } from "react-router-dom"
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Home from "./pages/Home"
-import ExerciseDetail from "./pages/ExerciseDetail"
+import './App.scss'
+import Sidebar from './Components/Sidebar/Sidebar';
 
-import Navbar from "./components/Navbar"
-import Footer from "./components/Footer"
-
-import "./App.css"
+import Directory from './Components/Content Pages/Directory';
 
 function App() {
-  return (
-    <div>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/exercise/:id" element={<ExerciseDetail />} />
-      </Routes>
-      <Footer />
-    </div>
-  )
+    return <Router>
+        <Sidebar />
+            <Routes>
+                <Route path='/dir' Component={Directory}></Route>
+
+                <Route path='*' Component={Directory} />
+            </Routes>
+    </Router>
 }
 
-export default App
+let div = document.body.appendChild(document.createElement('div'));
+div.className = 'root';
+createRoot(div).render(<App />);

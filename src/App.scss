@@ -1,0 +1,36 @@
+/* Define variables for reusability */
+$primary-color: #007bff;
+$secondary-color: #333;
+
+$background: #121735;
+$text-color: #41a38a;
+
+* {
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    head,
+    style {
+        display: none;
+    }
+}
+
+html, body{
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+body > * {
+    height: 100%;
+    overflow: hide;
+    -webkit-overflow-scrolling: touch;
+}
+
+.root {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
