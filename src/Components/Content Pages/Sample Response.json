@@ -1,9 +1,0 @@
-{
-    "username": "Bob",
-    "directory": ["Folder1", "Games"],
-    "content":[
-        {"isDirectory": true, "link": "/bin", "name": "bin"},
-        {"isDirectory": false, "link": "/ReadMe.txt", "name": "ReadMe.txt"},
-        {"isDirectory": false, "link": "/EldenRing.exe", "name": "EldenRing.exe"}
-    ]
-}
