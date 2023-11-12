@@ -82,6 +82,12 @@ module.exports = (env, argv) => {
             },
             compress: true,
             port: 5050,
+            proxy: {
+                '/api': {
+                    target: 'http://localhost:8080', // The URL of the external API server
+                    changeOrigin: true,
+                }
+            }
         }
     }
 }

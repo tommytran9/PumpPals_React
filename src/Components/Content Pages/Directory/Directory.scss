@@ -37,6 +37,7 @@ $file-hover-color: #182b54;
             flex-direction: column;
             position: relative;
             width: 15%;
+            min-width: 90px;
 
             &:hover{
                 cursor: pointer;
