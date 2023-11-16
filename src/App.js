@@ -1,5 +1,5 @@
 import './App.css';
-
+import NavigationBar from './components/NavigationBar';
 /*
   First page you see:
   > Authentication: Login/Sign Up
@@ -34,7 +34,7 @@ function App() {
   }
   return (
     <div className="App">
-      
+      <NavigationBar />
     </div>
   );
 }
