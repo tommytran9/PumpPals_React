@@ -1,3 +1,31 @@
 .App {
   text-align: center;
 }
+
+.PostCard {
+  border: 1px solid black;
+  margin: 2rem;
+  padding: 20px;
+}
+
+.post-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#pfp {
+  border-radius: 50%;
+  height: 75px;
+  width: 75px;
+}
+
+#msg {
+  text-align: justify;
+  margin: 2rem;
+}
+
+#like {
+  display: flex;
+  justify-content: flex-end;
+}

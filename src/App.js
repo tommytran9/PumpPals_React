@@ -1,5 +1,13 @@
 import './App.css';
-import NavigationBar from './components/NavigationBar';
+import LoginForm from './pages/LoginForm';
+import Signup from './pages/Signup';
+import Navbar from './Navbar';
+import Home from './pages/Home';
+import Forum from './pages/Forum';
+import About from './pages/About';
+import Profile from './pages/Profile';
+import { Route, Routes } from 'react-router-dom';
+
 /*
   First page you see:
   > Authentication: Login/Sign Up
@@ -25,16 +33,48 @@ import NavigationBar from './components/NavigationBar';
     * That being said, profiles will have: profile picture and biography on the left side, personal posts in the middle, potentially stat tracker
       on the right side.
   - Profile displays user's personal posts.
-  - Could potentially have a stat tracker (for whatever the hell people who exercise keep track of)
+  - A stat tracker (for whatever the hell people who exercise keep track of)
 */
 
 function App() {
   function fetchData() {
     fetch('localhost:')
   }
+
+
+  let component
+  // dummy data
+  // ID is for backend
+  const posts = [
+    {
+        id:1,
+        pfp:"https://i.imgur.com/kpsiG4E.png",
+        author:"unga bunga",
+        date:"11/16/2023",
+        message:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
+        liked:true
+    },
+    {
+        id:2,
+        pfp:"https://i.imgur.com/JnLqcFL.gif",
+        author:"ANDREW JOKI",
+        date:"11/16/2023",
+        message:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
+        liked:false
+    }
+  ]
+
   return (
     <div className="App">
-      <NavigationBar />
+      <Navbar />
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Home posts={posts} />} />
+          <Route path="/forum" element={<Forum />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </div>
     </div>
   );
 }
