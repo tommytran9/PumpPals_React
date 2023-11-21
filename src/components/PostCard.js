@@ -2,13 +2,13 @@ function PostCard({ post }) {
     const { pfp, author, date, message, liked } = post;
 
     return (
-        <div className="PostCard">
+        <div id="PostCardDiv">
             <div className="post-bar">
-                <img src={pfp} id="pfp" alt="Profile Picture" />
+                <img src={pfp} className="pfp" alt="Profile Picture" />
                 <p>{author}</p>
                 <p>{date}</p>
             </div>
-            <div id="msg">
+            <div className="msg">
                 <p>{message}</p>
             </div>
             <div id="like">
