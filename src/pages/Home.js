@@ -14,7 +14,10 @@ function Home({ posts }) {
 
     return (
         <div className="Home">
-            {renderPost()}
+            <h1>Dashboard</h1>
+            <div className="post-card-gen">
+                {renderPost()}
+            </div>
         </div>
     )
 }
