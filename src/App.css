@@ -2,25 +2,83 @@
   text-align: center;
 }
 
-.PostCard {
+#PostCardDiv {
+  border: 1px solid black;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+#UserCard {
+  border: 1px solid black;
+  margin: 2rem;
+  padding: 25px;
+  width: 300px;
+  text-align: justify;
+}
+
+.post-card-gen {
   border: 1px solid black;
   margin: 2rem;
   padding: 20px;
+}
+
+.user-card-gen {
+  border: 1px solid black;
+  margin: 2rem;
+  padding: 25px;
 }
 
 .post-bar {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  align-items: center;
 }
 
-#pfp {
+.container {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#forum-post-bar {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+#forum-user-bar {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  align-items: center;
+}
+
+#profile-user-bar {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  align-items: center;
+}
+
+#profile-post-bar {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.pfp {
   border-radius: 50%;
   height: 75px;
   width: 75px;
 }
 
-#msg {
+.msg {
   text-align: justify;
   margin: 2rem;
 }
