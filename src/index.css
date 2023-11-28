@@ -61,140 +61,147 @@ body {
   background-color: #777;
 }
 
-#LoginForm {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #121735;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-@keyframes drop {
-  0% {
-    top: -50%;
-  }
-  100% {
-    top: 110%;
-  }
-}
+$accent: #41a38a;
+$background: #121735; 
+$background-dark: #040717;
+$login-button-color: #4CAF50;
 
-#backdrop {
-  z-index: 1;
-  position: absolute;
-  top: 0vh;
-  bottom: 0vh;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-evenly;
-  background-color: rgba(18, 23, 53, 0.5);
-  opacity: 0.95;
-  backdrop-filter: blur(10px);
-}
 
-/* Manually unrolled the lines */
-#backdrop .line:nth-child(1),
-#backdrop .line:nth-child(2),
-/* ... */
-#backdrop .line:nth-child(10) {
-  position: relative;
-  width: 1px;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
-}
+$numberLines: 10;
 
-#backdrop .line::after,
-#backdrop .line::before {
-  content: '';
-  display: block;
-  position: absolute;
-  height: 15vh;
-  width: 3px;
-  transform: translateX(-1px);
-  top: -50%;
-  border-radius: 10px;
-  background-color: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
-  /* Removed the random() function for simplicity */
-  animation: drop 3s 0s infinite forwards;
-  animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
-}
+#LoginPopUp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: $background;
 
-#backdrop .line::before {
-  animation: drop 2s 0s infinite forwards;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-#LoginModal {
-  z-index: 2;
-  background-color: rgba(18, 23, 53, 0.9);
-  padding: 20px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  color: #41a38a;
-}
+    @keyframes drop {
+        0% {
+            top: -50%;
+        }
 
-#loginText {
-  font-size: 2em;
-  font-weight: bold;
-}
+        100% {
+            top: 110%;
+        }
+    }
 
-#loginError {
-  font-size: 0.8em;
-  color: red;
-}
+    #backdrop {
+        z-index: 998;
+        position: absolute;
+        top: 0vh;
+        bottom: 0vh;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-evenly;
+        background-color: rgba($background, 0.5);
+        opacity: 0.95;
+        backdrop-filter: blur(10px);
 
-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-}
+        @for $i from 1 through $numberLines {
+            $randomNumber: random(5);
 
-#modalInputs input {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-  opacity: 0.7;
-}
+            .line:nth-child(#{$i}) {
+                position: relative;
+                width: 1px;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.1);
 
-#modalInputs input:focus {
-  opacity: 1;
-}
+                &::after, &::before {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    height: 15vh;
+                    width: 3px;
+                    transform: translateX(-1px);
+                    top: -50%;
+                    border-radius: 10px;
+                    background-color: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+                    animation: drop 3s+(random(20)*0.25s) 0s infinite forwards;
+                    animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+                }
+                &::before{
+                    animation: drop 2s+(random(20)*0.25s) 0s infinite forwards;
+                }
+            }
+        }
+    }
 
-#modalButtons {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
+    #LoginModal{
+      background-color: rgba($background, 0.9); 
+        padding: 20px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        color: $accent;
 
-#modalButtons button {
-  border: none;
-  padding: 7px;
-  border-radius: 5px;
-  background-color: rgba(65, 163, 138, 0.8);
-  width: 100%;
-  margin-bottom: 10px;
-}
+        #loginText{
+            font-size: 2em;
+            font-weight: bold;
+        }
 
-#modalButtons button:first-of-type {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-}
+        #loginError{
+            font-size: 0.8em;
+            color: red;
+        }
 
-#modalButtons button:last-of-type {
-  background-color: transparent;
-  color: #4CAF50;
-  padding: 5px 0;
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+
+            #modalInputs{
+                input{
+                    width: 100%;
+                    padding: 12px 20px;
+                    margin: 8px 0;
+                    border: 1px solid #ccc; 
+                    border-radius: 4px; 
+                    background-color: #fff;                    
+                    opacity: 0.7;
+
+                    &:focus{
+                        opacity: 1;
+                    }
+                }
+            }
+
+            #modalButtons{
+                width: 100%;
+                display: flex;
+                justify-content: center; 
+                button{
+                    border: none;
+                    padding: 7px;
+                    border-radius: 5px;
+                    background-color: rgba($accent, 0.8);
+                    width: 100%; 
+                    margin-bottom: 10px; 
+                    &:first-of-type {
+                        background-color: $login-button-color; 
+                        color: white; 
+                        padding: 10px 20px; 
+                    }
+                    &:last-of-type {
+                        background-color: transparent; 
+                        color: $login-button-color; 
+                        padding: 5px 0; 
+                    }
+                }
+            }
+        }
+    }
 }
