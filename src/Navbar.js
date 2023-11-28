@@ -1,17 +1,38 @@
+import React, { useState } from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 
 function Navbar() {
     const path = window.location.pathname
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSearch = (event) => {
+        event.preventDefault();
+        // Implement your search logic here
+        // For example, redirect to a search results page or filter content on the current page
+        console.log('Search query:', searchQuery);
+    }
+
     return (
         <nav className="navbar">
             <Link to="/" className="site-title">
-                Pump Pals
+            <img src="/pumppalslogo.svg" alt="" style={{width: 200, height: 75,
+                 objectFit: 'contain'}} />
+                
             </Link>
             <ul>
                 <CustomLink to="/forum">Forum</CustomLink>
                 <CustomLink to="/about">About</CustomLink>
                 <CustomLink to="/profile">Profile</CustomLink>
             </ul>
+            <form onSubmit={handleSearch}>
+                <input 
+                    type="text" 
+                    placeholder="Search..." 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)} 
+                />
+                <button type="submit">Search</button>
+            </form>
         </nav>
     )
 }

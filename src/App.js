@@ -115,7 +115,7 @@ function App() {
 
   const users = [
     {
-      id:5,
+      id:7,
       pfp:"https://64.media.tumblr.com/d98ebcea17bf2224f245b6d01bd8576d/76b403552fe78a68-b5/s540x810/1d4294ff7c12f006af66f36127a778d97f2f25ed.gif",
       author:"Kathryn Newton",
       bio:"Cool stuff here. Some stuff about the user.",
@@ -129,21 +129,21 @@ function App() {
       followed:false
     },
     {
-      id:5,
+      id:7,
       pfp:"https://64.media.tumblr.com/d98ebcea17bf2224f245b6d01bd8576d/76b403552fe78a68-b5/s540x810/1d4294ff7c12f006af66f36127a778d97f2f25ed.gif",
       author:"Kathryn Newton",
       bio:"Cool stuff here. Some stuff about the user.",
       followed:false
     },
     {
-      id:5,
+      id:7,
       pfp:"https://64.media.tumblr.com/d98ebcea17bf2224f245b6d01bd8576d/76b403552fe78a68-b5/s540x810/1d4294ff7c12f006af66f36127a778d97f2f25ed.gif",
       author:"Kathryn Newton",
       bio:"Cool stuff here. Some stuff about the user.",
       followed:false
     },
     {
-      id:5,
+      id:7,
       pfp:"https://64.media.tumblr.com/d98ebcea17bf2224f245b6d01bd8576d/76b403552fe78a68-b5/s540x810/1d4294ff7c12f006af66f36127a778d97f2f25ed.gif",
       author:"Kathryn Newton",
       bio:"Cool stuff here. Some stuff about the user.",
@@ -174,6 +174,7 @@ function App() {
       <Navbar />
       <div className="container">
         <Routes>
+          <Route path="/LoginForm" element={<LoginForm />} />
           <Route path="/" element={<Home posts={posts} />} />
           <Route path="/forum" element={<Forum posts={otherPosts} users={users} />} />
           <Route path="/about" element={<About />} />
