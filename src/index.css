@@ -96,6 +96,7 @@ body {
   backdrop-filter: blur(10px);
 }
 
+
 #LoginModal {
   z-index: 2;
   background-color: rgba(18, 23, 53, 0.9);

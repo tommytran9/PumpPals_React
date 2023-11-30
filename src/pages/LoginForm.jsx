@@ -4,8 +4,6 @@ import React, { useState, useRef } from "react";
 // Then gonna have a button or two, then gonna have a link for signup (if don't do second button right).
 
 // Look at 'Experimental-Michael' on Github; just gonna follow Joshua's example for Login.
-    const numberLines = 10; // if more than 10, change the scss to allow more to render
-
 function LoginForm() {
     const [loggedIn, setLoginInfo] = useState(null);
     const [errorState, setErrorState] = useState(false);
@@ -83,7 +81,6 @@ function LoginForm() {
                 </form>
             </div>
             <div id="backdrop">
-                {[...Array(numberLines).keys()].map(i => <span key={i} className="line" />)}
             </div>
         </div>
     );
