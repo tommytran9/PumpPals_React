@@ -1,12 +1,12 @@
 import './App.css';
 import LoginForm from './pages/LoginForm';
-import Signup from './pages/Signup';
 import Navbar from './Navbar';
 import Home from './pages/Home';
 import Forum from './pages/Forum';
 import About from './pages/About';
 import Profile from './pages/Profile';
 import { Route, Routes } from 'react-router-dom';
+import CreateAccount from './pages/CreateAccount';
 
 /*
   First page you see:
@@ -181,6 +181,7 @@ function App() {
           <Route path="/forum" element={<Forum posts={otherPosts} users={users} />} />
           <Route path="/about" element={<About />} />
           <Route path="/profile" element={<Profile posts={otherPosts} users={singleUser} stats={stats} />} />
+          <Route path="/createaccount" element={<CreateAccount />} />
         </Routes>
       </div>
     </div>
