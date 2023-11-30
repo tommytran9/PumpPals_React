@@ -27,14 +27,14 @@ function Navbar() {
             <form onSubmit={handleSearch} class="search-form">
                  <input 
                      type="text" 
-                     placeholder="Search..." 
+                     placeholder="Search" 
                      value={searchQuery}
                      onChange={(e) => setSearchQuery(e.target.value)}
                          class="search-input" 
              />
                   
                   <button type="submit" class="search-button" >
-                  <img src="search.png"></img>
+                  <img src="search.png" ></img>
                   </button>
                   
             </form>
