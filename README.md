@@ -1,94 +1,72 @@
-![EduMates](https://github.com/Mohammed-Nasif/EduMates-ITI-Graduation-Project/blob/main/Documentations/Project%20Images/bc855d0d-19cf-42e8-9dc0-4479b8aef916.jpg?raw=true)
+# Getting Started with Create React App
 
-# EduMates 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-<!-- Add buttons here -->
+## Available Scripts
 
-<!-- Describe your project in brief -->
+In the project directory, you can run:
 
-In the age of Epidemics, the importance of remote communication has significantly aroused.
-Getting people closer despite of physical distancing. Business, Marketing , Education, even health consultations are done over the internet. 
+### `npm start`
 
-**EduMates** website provide users a community to engage with their environments. And as we believe that communities develop through education our website has educational side that facilitates educational process to our users through courses and other features.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-### [View UX Study](https://github.com/Mohammed-Nasif/EduMates-ITI-Graduation-Project/blob/main/Documentations/UX-Study-EduMates.pdf)
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
+### `npm test`
 
-![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/navendu-pottekkat/awesome-readme?include_prereleases)
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-<!-- 
-![GitHub All Releases](https://img.shields.io/github/downloads/navendu-pottekkat/awesome-readme/total) -->
+### `npm run build`
 
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-# EduMates Team
-![EduMates-Team](https://github.com/Mohammed-Nasif/EduMates-ITI-Graduation-Project/blob/main/Documentations/Project%20Images/EduMatesTeam.jpg?raw=true)
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
----
-# Features Summary
+### `npm run eject`
 
-- Interactive Home Page With All Social media Features.
-- Real-Time Live Chat.
-- Real-Time Notification System
-- Courses With Enrollment and Rating System.
-- Q&A Section On Each Course.
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
----
-# EduMates-Demo 
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-#### [Visit EduMates](https://edu-mates.herokuapp.com/)
-*OR*
-#### Watch The Live Demo
-[![Watch the video](https://github.com/Mohammed-Nasif/EduMates-ITI-Graduation-Project/blob/main/Documentations/Project%20Images/Watch%20Demo.png?raw=true)](https://www.youtube.com/watch?v=ZwzXjuTHjU8)
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-# Table of contents
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-- [About EduMates](#edumates)
-- [EduMates Team](#edumates-team)
-- [Features Summary](#features-summary)
-- [EduMates Demo Preview](#edumates-demo)
-- [Table of contents](#table-of-contents)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Technologies](#technologies)
-- [Copyright](#copyright)
+## Learn More
 
-# Installation
-[Back To Top ⬆️](#table-of-contents)
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To use this project, first clone the repo on your device using the command below:
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-```git init```
+### Code Splitting
 
-```git clone https://github.com/Mohammed-Nasif/EduMates-ITI-Graduation-Project.git```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-# Usage
-[Back To Top ⬆️](#table-of-contents)
+### Analyzing the Bundle Size
 
-- After The Installation you can now open it on any Code Text Editor (VS Code).
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-- You Must First Run the `npm install` in VS Terminal Using in Project File Direction To Install All Required Packages.
+### Making a Progressive Web App
 
-- Theb You Must First Run the `npm run serve-json` in VS Terminal Using in Project File Direction To Go Start The JSON-Server, Now Run the `npm start` in VS Terminal Using in Project File Direction To Go Live With The Project. 
-    *You can use ``npm run startdev`` to run the two with one command.*
-- Now you can open the Project on any browser using the localhost of Port: 3000. [http://localhost:3000/]
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-# Technologies
-[Back To Top ⬆️](#table-of-contents)
+### Advanced Configuration
 
-- React Js.
-- React Route.
-- React Hook Form.
-- React Select.
-- FireBase.
-- JSON Server.
-- Axios.
-- BootStrap5.
-- SCSS.
-- Figma.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-# Copyright
-[Back To Top ⬆️](#table-of-contents)
+### Deployment
 
-**© EduMates.**
----
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+//Test commit
