@@ -86,4 +86,25 @@
 #like {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  background-color: #fff;
+  padding: 30px 50px;
+  border-radius: 12px;
+}
+
+.btn {
+  border: none;
+  color: #fff;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #bdc0c5;
+  border-radius: 4px;
+  padding: 6px 15px;
+  margin: 0 10px;
+}
+
+.like-active {
+  background-color: #09b6fe;
 }
