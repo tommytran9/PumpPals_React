@@ -12,7 +12,7 @@ function PostCard({ post }) {
                 <p>{message}</p>
             </div>
             <div id="like">
-                <button>{liked ? "yes" : "no"}</button>
+                <button>{liked ? "Like" : "no"}</button>
             </div>
         </div>
     )

@@ -161,3 +161,36 @@ form {
   color: #09b6fe;
   padding: 5px 0;
 }
+
+.search-form {
+  display: flex;        /* Enables Flexbox */
+  align-items: center;
+}
+
+.search-input {
+  padding: 5px 10px;
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-button {
+  padding: 5px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left:120px
+  
+  
+}
+.search-input {
+  flex-grow: 1;           /* Allows the input to grow and fill available space */
+  margin-right: 10px;  
+}
+
+.search-button img {
+  width: 20px;       /* Width of the image */
+  height: 20px;      /* Height of the image */
+}
