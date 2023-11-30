@@ -73,14 +73,7 @@ body {
   align-items: center;
 }
 
-@keyframes drop {
-  0% {
-    top: -50%;
-  }
-  100% {
-    top: 110%;
-  }
-}
+
 
 #backdrop {
   z-index: 1;
@@ -107,7 +100,7 @@ body {
   justify-content: center;
   align-items: center;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  color: #41a38a;
+  color: #09b6fe;
 }
 
 #loginText {
@@ -158,13 +151,13 @@ form {
 }
 
 #modalButtons button:first-of-type {
-  background-color: #4CAF50;
+  background-color: #09b6fe;
   color: white;
   padding: 10px 20px;
 }
 
 #modalButtons button:last-of-type {
   background-color: transparent;
-  color: #4CAF50;
+  color: #09b6fe;
   padding: 5px 0;
 }
