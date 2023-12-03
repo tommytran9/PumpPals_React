@@ -3,29 +3,44 @@
 }
 
 #PostCardDiv {
-  border: 1px solid black;
+  border: 1px white;
   padding: 20px;
   margin-top: 50px;
+  background: #FFF;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 #UserCard {
-  border: 1px solid black;
+  border: 1px white;
   margin: 2rem;
   padding: 25px;
   width: 300px;
   text-align: justify;
+  background: #FFF;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .post-card-gen {
-  border: 1px solid black;
   margin: 2rem;
   padding: 20px;
+  background: #FFF0;
+ 
 }
 
 .user-card-gen {
-  border: 1px solid black;
   margin: 2rem;
   padding: 25px;
+  background: #FFF0;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .post-bar {
@@ -33,28 +48,42 @@
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  background: #FFF;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
 }
 
 .container {
-  border: 1px solid black;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  background: #F5F5F5;
 }
 
 #forum-post-bar {
-  border: 1px solid black;
+  border: 1px white;
   display: flex;
   flex-direction: column;
   width: 70%;
+  background: #FFF0;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 #forum-user-bar {
-  border: 1px solid black;
+  border: 1px white;
   display: flex;
   flex-direction: column;
   width: 30%;
   align-items: center;
+  background: #FFF0;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 #profile-user-bar {
@@ -63,6 +92,11 @@
   flex-direction: column;
   width: 30%;
   align-items: center;
+  background: #FFF0;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 #profile-post-bar {
@@ -70,6 +104,11 @@
   display: flex;
   flex-direction: column;
   width: 50%;
+  background: #FFF0;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .pfp {
@@ -86,4 +125,25 @@
 #like {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  background-color: #fff;
+  padding: 30px 50px;
+  border-radius: 12px;
+}
+
+.btn {
+  border: none;
+  color: #fff;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #bdc0c5;
+  border-radius: 4px;
+  padding: 6px 15px;
+  margin: 0 10px;
+}
+
+.like-active {
+  background-color: #09b6fe;
 }

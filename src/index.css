@@ -96,36 +96,6 @@ body {
   backdrop-filter: blur(10px);
 }
 
-/* Manually unrolled the lines */
-#backdrop .line:nth-child(1),
-#backdrop .line:nth-child(2),
-/* ... */
-#backdrop .line:nth-child(10) {
-  position: relative;
-  width: 1px;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-#backdrop .line::after,
-#backdrop .line::before {
-  content: '';
-  display: block;
-  position: absolute;
-  height: 15vh;
-  width: 3px;
-  transform: translateX(-1px);
-  top: -50%;
-  border-radius: 10px;
-  background-color: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
-  /* Removed the random() function for simplicity */
-  animation: drop 3s 0s infinite forwards;
-  animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
-}
-
-#backdrop .line::before {
-  animation: drop 2s 0s infinite forwards;
-}
 
 #LoginModal {
   z-index: 2;
@@ -152,7 +122,7 @@ body {
 
 form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   margin: 10px;
@@ -198,3 +168,26 @@ form {
   color: #4CAF50;
   padding: 5px 0;
 }
+
+
+
+.search-input {
+  padding: 5px 10px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+
+
+.search-button{
+  background-color:transparent;
+  border: none;
+}
+
+.search-button img{
+  width: 20px;       /* Width of the image */
+  height: 20px;      /* Height of the image */
+  
+}
+

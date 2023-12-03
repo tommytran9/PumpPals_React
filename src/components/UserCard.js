@@ -11,7 +11,7 @@ function UserCard({ userPost }) {
                 <p>{bio}</p>
             </div>
             <div>
-                <button>{followed ? "followed" : "follow"}</button>
+                <button>{followed ? "following" : "follow"}</button>
             </div>
         </div>
     )

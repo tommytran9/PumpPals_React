@@ -24,15 +24,21 @@ function Navbar() {
                 <CustomLink to="/about">About</CustomLink>
                 <CustomLink to="/profile">Profile</CustomLink>
             </ul>
-            <form onSubmit={handleSearch}>
-                <input 
-                    type="text" 
-                    placeholder="Search..." 
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)} 
-                />
-                <button type="submit">Search</button>
+            <form onSubmit={handleSearch} class="search-form">
+                 <input 
+                     type="text" 
+                     placeholder="Search" 
+                     value={searchQuery}
+                     onChange={(e) => setSearchQuery(e.target.value)}
+                         class="search-input" 
+             />
+                  
+                  <button type="submit" class="search-button" >
+                  <img src="search.png" ></img>
+                  </button>
+                  
             </form>
+            
         </nav>
     )
 }

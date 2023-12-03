@@ -10,6 +10,6 @@
     <text font-family="Raleway" font-size="105" font-style="normal" font-weight="900" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(9,182,254); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-149.26" y="32.98">PUMP</tspan></text>
   </g>
   <g transform="matrix(1, 0, 0, 1, 707.3499861262736, 573.1699914510546)" style="" id="63628a61-94b8-4789-87ab-6e672dfcf530">
-    <text font-family="Raleway" font-size="105" font-style="normal" font-weight="900" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1; white-space: pre;"><tspan x="-128.1" y="32.98">PALS</tspan></text>
+    <text style="fill: rgb(255, 255, 255); font-family: Raleway; font-size: 105px; font-weight: 900; white-space: pre;" x="-128.1" y="32.98">PALS</text>
   </g>
 </svg>
