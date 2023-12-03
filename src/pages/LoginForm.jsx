@@ -1,4 +1,6 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { login, getUsername } from "../Util/ServerConnector.js";
 
 // Building a form using the Form element, and inside the form, going to have 2 inputs: username and pw.
 // Then gonna have a button or two, then gonna have a link for signup (if don't do second button right).
@@ -7,6 +9,9 @@ import React, { useState, useRef } from "react";
 function LoginForm() {
     const [loggedIn, setLoginInfo] = useState(null);
     const [errorState, setErrorState] = useState(false);
+    // used to redirect to the home page after login
+    // as well as direct to the signup page
+    const navigate = useNavigate();
 
     const hasError = () => {
         usernameInputRef.current.value = "";
@@ -24,11 +29,7 @@ function LoginForm() {
     }
 
     const createAccount = async () => {
-        let bool = await createUser(usernameInputRef.current.value, passwordInputRef.current.value);
-        if (bool)
-            setLoginInfo(getUsername());
-        else
-            hasError()
+        navigate("/createAccount");
     }
 
     const usernameInputRef = useRef(null); // Ref for the username input

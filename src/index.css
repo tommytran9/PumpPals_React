@@ -73,15 +73,6 @@ body {
   align-items: center;
 }
 
-@keyframes drop {
-  0% {
-    top: -50%;
-  }
-  100% {
-    top: 110%;
-  }
-}
-
 #backdrop {
   z-index: 1;
   position: absolute;
