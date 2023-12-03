@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function UserCard({ userPost }) {
     const { pfp, author, bio, followed } = userPost;
 
@@ -10,11 +12,37 @@ function UserCard({ userPost }) {
             <div>
                 <p>{bio}</p>
             </div>
-            <div>
-                <button>{followed ? "following" : "follow"}</button>
+            <div id="following">
+                <FollowButtonButton />
             </div>
         </div>
     )
+    //Follow Button
+    function FollowButton (){
+        let [follow,Setfollow] = useState('follow');
+        const [activeBtn, SetActiveBtn] = useState("none");
+
+        const handleLikeClick = () => {
+            if (activeBtn === "none") {
+                Setfollow('following');
+                SetActiveBtn("Following");
+                return;
+            }
+    
+            if (activeBtn === "following") {
+                Setfollow('follow');
+                setActiveBtn("none");
+                return;
+            }
+        };
+
+        return (
+            <button className={`btn ${activeBtn === 'following' ? 'following-active' : ''}`} onClick={handleLikeClick}>
+                {following}
+            </button>
+        );
+
+    }
 }
 
 export default UserCard;
