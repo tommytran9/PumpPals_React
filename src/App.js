@@ -176,7 +176,7 @@ function App() {
       <div className="container">
     
         <Routes>
-          <Route path="/LoginForm" element={<LoginForm />} />
+          <Route path="/loginform" element={<LoginForm />} />
           <Route path="/" element={<Home posts={posts} />} />
           <Route path="/forum" element={<Forum posts={otherPosts} users={users} />} />
           <Route path="/about" element={<About />} />

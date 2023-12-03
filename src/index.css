@@ -73,7 +73,14 @@ body {
   align-items: center;
 }
 
-
+@keyframes drop {
+  0% {
+    top: -50%;
+  }
+  100% {
+    top: 110%;
+  }
+}
 
 #backdrop {
   z-index: 1;
@@ -100,7 +107,7 @@ body {
   justify-content: center;
   align-items: center;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  color: #09b6fe;
+  color: #41a38a;
 }
 
 #loginText {
@@ -151,13 +158,36 @@ form {
 }
 
 #modalButtons button:first-of-type {
-  background-color: #09b6fe;
+  background-color: #4CAF50;
   color: white;
   padding: 10px 20px;
 }
 
 #modalButtons button:last-of-type {
   background-color: transparent;
-  color: #09b6fe;
+  color: #4CAF50;
   padding: 5px 0;
 }
+
+
+
+.search-input {
+  padding: 5px 10px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+
+
+.search-button{
+  background-color:transparent;
+  border: none;
+}
+
+.search-button img{
+  width: 20px;       /* Width of the image */
+  height: 20px;      /* Height of the image */
+  
+}
+
