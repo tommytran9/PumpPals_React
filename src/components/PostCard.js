@@ -3,6 +3,7 @@ import { useState } from 'react';
 function PostCard({ post }) {
     const { pfp, author, date, message } = post;
 
+    //Like button function
     function LikeButton () {
         const [likes, setLikes] = useState(0);
         const [activeBtn, setActiveBtn] = useState("none");
@@ -27,6 +28,7 @@ function PostCard({ post }) {
                 {likes}
             </button>
         );
+        
     }
 
     return (
