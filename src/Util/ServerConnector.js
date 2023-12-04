@@ -169,6 +169,60 @@ export async function uploadProfilePicture(file) {
 }
 
 /**
+ * Uploads a picture
+ * @param {File} file - The  picture file'
+ * @param {String} id - The id of the post
+ * @returns {{success:boolean, response:String}}
+ */
+export async function uploadPicturePost(file, post) {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append(
+    "post",
+    new Blob([JSON.stringify(post)], { type: "application/json" })
+  );
+
+  try {
+    const response = await Axios.post(
+      "/api/posts/create/picture",
+      formData,
+      await createAuthHeader()
+    );
+    return { success: true, response: response.data };
+  } catch (error) {
+    if (error.response) {
+      return { success: false, response: error.response.data };
+    } else {
+      return { success: false, response: "Failed to upload profile picture." };
+    }
+  }
+}
+
+/**
+ * Retrieves a post's picture
+ * @param {String} id - The id of the post
+ * @returns {Promise<Object>} - The response entity containing the post picture
+ */
+export async function getPostPicture(id) {
+  try {
+    const response = await Axios.get(`/api/posts/picture/${id}`, {
+      responseType: "arraybuffer",
+      ...(await createAuthHeader()),
+    });
+    if (response.status !== 200) {
+      return null;
+    }
+    // Create a Blob with type 'image/png'
+    const blob = new Blob([response.data], { type: "image/png" });
+    return URL.createObjectURL(blob);
+  } catch (error) {
+    console.error("Failed to retrieve post picture:", error);
+    return "Failed to download picture.";
+  }
+}
+
+
+/**
  * Retrieves the profile picture for a given username
  * @param {String} username - The username of the user
  * @returns {Promise<String>} - The URL of the profile picture

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { createPost } from "../Util/ServerConnector";
+import { createPost, uploadPicturePost } from "../Util/ServerConnector";
 import { useNavigate } from "react-router-dom";
 
 function CreatePost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [picture, setPicture] = useState(null);
   const navigate = useNavigate();
 
   const handleCreatePost = async () => {
@@ -19,7 +20,19 @@ function CreatePost() {
     };
 
     try {
-      const createdPost = await createPost(post);
+      let createdPost;
+      if (picture) {
+        const uploadResult = await uploadPicturePost(picture, post);
+        if (uploadResult.success) {
+          createdPost = uploadResult.response;
+        } else {
+          console.error("Failed to upload picture:", uploadResult.response);
+          return;
+        }
+      } else {
+        createdPost = await createPost(post);
+      }
+
       console.log("Post created:", createdPost);
       navigate("/");
       // Handle success, e.g., redirect to post details page
@@ -27,6 +40,10 @@ function CreatePost() {
       console.error("Failed to create post:", error);
       // Handle error, e.g., show error message to the user
     }
+  };
+
+  const handlePictureChange = (e) => {
+    setPicture(e.target.files[0]);
   };
 
   return (
@@ -43,6 +60,7 @@ function CreatePost() {
         value={content}
         onChange={(e) => setContent(e.target.value)}
       ></textarea>
+      <input type="file" onChange={handlePictureChange} />
       <button onClick={handleCreatePost}>Create</button>
     </div>
   );

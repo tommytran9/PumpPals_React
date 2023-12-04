@@ -31,7 +31,11 @@ function Profile() {
       setUser(user);
 
       const userPosts = await getPostsByUsername(username);
-      setPosts(userPosts);
+      // Sort posts by creation date in descending order
+      const sortedPosts = userPosts.sort(
+        (a, b) => new Date(b.uploadDate) - new Date(a.uploadDate)
+      );
+      setPosts(sortedPosts);
 
       setLoading(false);
     };

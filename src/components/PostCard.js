@@ -5,6 +5,7 @@ import {
   unlikePost,
   getUsername,
   commentPost,
+  getPostPicture, // Added line
 } from "../Util/ServerConnector.js";
 import { Link } from "react-router-dom";
 
@@ -20,11 +21,12 @@ function PostCard({ post }) {
     comments,
     commenters,
     likers,
+    hasPicture,
   } = post;
   const [profilePicture, setProfilePicture] = useState(null);
   const [user, setUser] = useState("");
   const [comment, setComment] = useState("");
-  const [allComments, setAllComments] = useState([]); // Added line
+  const [allComments, setAllComments] = useState([]);
 
   useEffect(() => {
     const newComments = comments.map((comment, i) => ({
@@ -53,6 +55,23 @@ function PostCard({ post }) {
     fetchProfilePicture();
   }, []);
 
+  const [postPicture, setPostPicture] = useState(null);
+
+  useEffect(() => {
+    const fetchPostPicture = async () => {
+      if (hasPicture) {
+        try {
+          const pictureUrl = await getPostPicture(postId);
+          setPostPicture(pictureUrl); // Set the post picture
+        } catch (error) {
+          console.error("Failed to retrieve post picture:", error);
+        }
+      }
+    };
+
+    fetchPostPicture();
+  }, [hasPicture, postId]);
+
   const formattedDate = new Date(uploadDate).toLocaleDateString();
 
   const handleCommentChange = (event) => {
@@ -79,6 +98,19 @@ function PostCard({ post }) {
         </p>
         <p>{formattedDate}</p>
       </div>
+      {hasPicture && (
+        <div
+          className="post-picture"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <img
+            src={postPicture}
+            alt="Post Picture"
+            className="post-picture-img"
+            style={{ maxWidth: "100%", maxHeight: "750px" }}
+          />
+        </div>
+      )}
       <div className="msg">
         <p>{content}</p>
       </div>
