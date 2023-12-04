@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function StatCard({ stat }) {
-  const { dateOfBirth, height, weight, bio, gender } = stat;
+  const { dateOfBirth, height, weight, fitnessGoals, gender } = stat;
   const [age, setAge] = useState(0);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function StatCard({ stat }) {
         <li>Gender: {gender}</li>
         <li>Height: {height}</li>
         <li>Weight: {weight}</li>
-        <li>Bio: {bio}</li>
+        <li>Fitness Goals: {fitnessGoals}</li>
       </ul>
     </div>
   );
