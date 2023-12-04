@@ -1,25 +1,43 @@
-import PostCard from '../components/PostCard';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import PostCard from "../components/PostCard";
+import { loginStillValid, getAllPosts } from "../Util/ServerConnector.js"; // Import loginStillValid and getAllPosts
 
-function Home({ posts }) {
-    // posts is an array of post objects pulled from the back end. (Passed down from the parent as a prop.)
+function Home() {
+  const navigate = useNavigate();
+  const [posts, setPosts] = useState([]);
 
-    function renderPost() {
-        return (
-            // When you're mapping posts, you're iterating through the array of objects and performing whatever
-            // functional code you're writing in. In this case, it's rendering in a subcomponent and passing the
-            // individual post data into the subcomponent.
-            posts.map(post => <PostCard post={post} />)
-        )
+  useEffect(() => {
+    const checkAuth = async () => {
+      const isValid = await loginStillValid();
+      if (!isValid) {
+        navigate("/login");
+      }
+    };
+
+    const fetchPosts = async () => {
+      const allPosts = await getAllPosts();
+      console.log(allPosts);
+      setPosts(allPosts);
+    };
+
+    checkAuth();
+    fetchPosts();
+  }, []); // Empty dependency array means this effect runs once on mount
+
+  function renderPosts() {
+    if (!posts) {
+      return <p>Loading...</p>;
     }
+    return posts.map((post) => <PostCard post={post} />);
+  }
 
-    return (
-        <div className="Home">
-            <h1>Dashboard</h1>
-            <div className="post-card-gen">
-                {renderPost()}
-            </div>
-        </div>
-    )
+  return (
+    <div className="Home">
+      <h1>Dashboard</h1>
+      <div className="post-card-gen">{renderPosts()}</div>
+    </div>
+  );
 }
 
 export default Home;

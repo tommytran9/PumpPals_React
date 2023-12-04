@@ -7,6 +7,10 @@ import About from './pages/About';
 import Profile from './pages/Profile';
 import { Route, Routes } from 'react-router-dom';
 import CreateAccount from './pages/CreateAccount';
+import EditProfile from './pages/EditProfile';
+import CreatePost from './pages/CreatePost';
+import Logout from './pages/Logout';
+import User from './pages/User';
 
 /*
   First page you see:
@@ -45,19 +49,21 @@ function App() {
   // ID is for backend
   const posts = [
     {
-        id:1,
+        postId:1,
         pfp:"https://i.imgur.com/kpsiG4E.png",
-        author:"unga bunga",
-        date:"11/16/2023",
-        message:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
+        name:"unga bunga",
+        username:"test1",
+        uploadDate:"11/16/2023",
+        content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
         liked:true
     },
     {
         id:2,
         pfp:"https://i.imgur.com/JnLqcFL.gif",
-        author:"ANDREW JOKI",
+        name:"ANDREW JOKI",
+        username:"testuser2",
         date:"11/16/2023",
-        message:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
+        content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
         liked:false
     }
   ]
@@ -176,12 +182,16 @@ function App() {
       <div className="container">
     
         <Routes>
-          <Route path="/loginform" element={<LoginForm />} />
+          <Route path="/login" element={<LoginForm />} />
           <Route path="/" element={<Home posts={posts} />} />
           <Route path="/forum" element={<Forum posts={otherPosts} users={users} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/profile" element={<Profile posts={otherPosts} users={singleUser} stats={stats} />} />
-          <Route path="/createaccount" element={<CreateAccount />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/user/:username?" element={<User />} />
+          <Route path="/create-account" element={<CreateAccount />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </div>
     </div>
