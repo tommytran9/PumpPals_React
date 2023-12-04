@@ -4,6 +4,7 @@ import {
   uploadProfilePicture,
   getUsername,
   getUserByUsername,
+  updateUser,
 } from "../Util/ServerConnector.js";
 
 const EditProfile = () => {
@@ -49,16 +50,31 @@ const EditProfile = () => {
     }
   };
   const navigate = useNavigate();
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission and update user profile
-    navigate("/profile");
+    setErrorMessage(""); // Reset the error message
+
+    const result = await updateUser(
+      name,
+      dateOfBirth,
+      gender,
+      weight,
+      height,
+      fitnessGoals,
+      bio
+    );
+
+    if (result.success) {
+      navigate("/profile");
+    } else {
+      setErrorMessage(result.response);
+    }
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column" }}>
       <h1>Edit Profile</h1>
-      {errorMessage && <p>{errorMessage}</p>} {/* Display the error message */}
+      {errorMessage && <p>{errorMessage.message}</p>} {/* Display the error message */}
       <form onSubmit={handleFormSubmit}>
         <div>
           <label>Profile Picture:</label>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PostCard from "../components/PostCard";
-import { loginStillValid, getAllPosts } from "../Util/ServerConnector.js"; // Import loginStillValid and getAllPosts
+import { loginStillValid, getAllPosts, getFollowingPosts } from "../Util/ServerConnector.js"; // Import loginStillValid and getAllPosts
 
 function Home() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ function Home() {
     };
 
     const fetchPosts = async () => {
-      const allPosts = await getAllPosts();
+      const allPosts = await getFollowingPosts();
       console.log(allPosts);
       setPosts(allPosts);
     };
@@ -35,6 +35,7 @@ function Home() {
   return (
     <div className="Home">
       <h1>Dashboard</h1>
+      <h2>Home Feed</h2>
       <div className="post-card-gen">{renderPosts()}</div>
     </div>
   );

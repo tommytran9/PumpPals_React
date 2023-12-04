@@ -1,16 +1,17 @@
-import './App.css';
-import LoginForm from './pages/LoginForm';
-import Navbar from './Navbar';
-import Home from './pages/Home';
-import Forum from './pages/Forum';
-import About from './pages/About';
-import Profile from './pages/Profile';
-import { Route, Routes } from 'react-router-dom';
-import CreateAccount from './pages/CreateAccount';
-import EditProfile from './pages/EditProfile';
-import CreatePost from './pages/CreatePost';
-import Logout from './pages/Logout';
-import User from './pages/User';
+import "./App.css";
+import LoginForm from "./pages/LoginForm";
+import Navbar from "./Navbar";
+import Home from "./pages/Home";
+import Forum from "./pages/Forum";
+import About from "./pages/About";
+import Profile from "./pages/Profile";
+import { Route, Routes } from "react-router-dom";
+import CreateAccount from "./pages/CreateAccount";
+import EditProfile from "./pages/EditProfile";
+import CreatePost from "./pages/CreatePost";
+import Logout from "./pages/Logout";
+import User from "./pages/User";
+import React, { useState } from "react";
 
 /*
   First page you see:
@@ -41,154 +42,29 @@ import User from './pages/User';
 */
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   function fetchData() {
-    fetch('localhost:')
+    fetch("localhost:");
   }
-  
-  // dummy data
-  // ID is for backend
-  const posts = [
-    {
-        postId:1,
-        pfp:"https://i.imgur.com/kpsiG4E.png",
-        name:"unga bunga",
-        username:"test1",
-        uploadDate:"11/16/2023",
-        content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
-        liked:true
-    },
-    {
-        id:2,
-        pfp:"https://i.imgur.com/JnLqcFL.gif",
-        name:"ANDREW JOKI",
-        username:"testuser2",
-        date:"11/16/2023",
-        content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
-        liked:false
-    }
-  ]
-
-  const otherPosts = [
-    {
-      id:3,
-      pfp:"https://i.ibb.co/80RrFqy/263.gif",
-      author:"Some Cool Person",
-      date:"11/20/2023",
-      message:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
-      liked:true
-    },
-    {
-      id:4,
-      pfp:"https://assets.mycast.io/actor_images/actor-miles-brown-255515_large.jpg?1628743818",
-      author:"Miles Morales",
-      date:"11/20/2023",
-      message:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
-      liked:true
-    },
-    {
-      id:5,
-      pfp:"https://i.imgur.com/7rR90wt.gif",
-      author:"Jacob Batalon",
-      date:"11/20/2023",
-      message:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
-      liked:false
-    },
-    {
-      id:5,
-      pfp:"https://i.imgur.com/7rR90wt.gif",
-      author:"Jacob Batalon",
-      date:"11/20/2023",
-      message:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
-      liked:false
-    },
-    {
-      id:5,
-      pfp:"https://i.imgur.com/7rR90wt.gif",
-      author:"Jacob Batalon",
-      date:"11/20/2023",
-      message:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
-      liked:false
-    },
-    {
-      id:5,
-      pfp:"https://i.imgur.com/7rR90wt.gif",
-      author:"Jacob Batalon",
-      date:"11/20/2023",
-      message:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Commodo viverra maecenas accumsan lacus vel facilisis. Egestas sed tempus urna et pharetra pharetra massa massa. Consequat mauris nunc congue nisi vitae suscipit tellus. Integer vitae justo eget magna fermentum iaculis eu non. Elementum tempus egestas sed sed. Adipiscing elit duis tristique sollicitudin nibh sit amet. Vitae semper quis lectus nulla at volutpat. Et sollicitudin ac orci phasellus egestas. Netus et malesuada fames ac turpis egestas. Odio tempor orci dapibus ultrices in iaculis nunc. Ultrices mi tempus imperdiet nulla malesuada pellentesque. Egestas fringilla phasellus faucibus scelerisque. Proin fermentum leo vel orci porta.",
-      liked:false
-    }
-  ]
-
-  const users = [
-    {
-      id:7,
-      pfp:"https://64.media.tumblr.com/d98ebcea17bf2224f245b6d01bd8576d/76b403552fe78a68-b5/s540x810/1d4294ff7c12f006af66f36127a778d97f2f25ed.gif",
-      author:"Kathryn Newton",
-      bio:"Cool stuff here. Some stuff about the user.",
-      followed:false
-    },
-    {
-      id:6,
-      pfp:"https://i.pinimg.com/originals/d1/1b/35/d11b3564dd6c136fefaad6ff295442b4.gif",
-      author:"Elizabeth Olsen",
-      bio:"More cool stuff here. Some stuff about the user, electric boogaloo.",
-      followed:false
-    },
-    {
-      id:7,
-      pfp:"https://64.media.tumblr.com/d98ebcea17bf2224f245b6d01bd8576d/76b403552fe78a68-b5/s540x810/1d4294ff7c12f006af66f36127a778d97f2f25ed.gif",
-      author:"Kathryn Newton",
-      bio:"Cool stuff here. Some stuff about the user.",
-      followed:false
-    },
-    {
-      id:7,
-      pfp:"https://64.media.tumblr.com/d98ebcea17bf2224f245b6d01bd8576d/76b403552fe78a68-b5/s540x810/1d4294ff7c12f006af66f36127a778d97f2f25ed.gif",
-      author:"Kathryn Newton",
-      bio:"Cool stuff here. Some stuff about the user.",
-      followed:false
-    },
-    {
-      id:7,
-      pfp:"https://64.media.tumblr.com/d98ebcea17bf2224f245b6d01bd8576d/76b403552fe78a68-b5/s540x810/1d4294ff7c12f006af66f36127a778d97f2f25ed.gif",
-      author:"Kathryn Newton",
-      bio:"Cool stuff here. Some stuff about the user.",
-      followed:false
-    }
-  ]
-
-  const stats = [
-    {
-      age:32,
-      gender:"male",
-      height:"5\'10\"",
-      weight:"220 lbs",
-      goals:"to gain more muscle mass"
-    }
-  ]
-
-  const singleUser = [
-    {
-      pfp:"https://i.imgur.com/7rR90wt.gif",
-      author:"Jacob Batalon",
-      bio:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque eu tincidunt tortor aliquam nulla facilisi cras."
-    }
-  ]
 
   return (
     <div className="App">
-    
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <div className="container">
-    
         <Routes>
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/" element={<Home posts={posts} />} />
-          <Route path="/forum" element={<Forum posts={otherPosts} users={users} />} />
+          <Route
+            path="/login"
+            element={<LoginForm setIsLoggedIn={setIsLoggedIn} />}
+          />
+          <Route path="/" element={<Home />} />
+          <Route path="/forum" element={<Forum />} />
           <Route path="/about" element={<About />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/user/:username?" element={<User />} />
-          <Route path="/create-account" element={<CreateAccount />} />
+          <Route
+            path="/create-account"
+            element={<CreateAccount setIsLoggedIn={setIsLoggedIn} />}
+          />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/logout" element={<Logout />} />

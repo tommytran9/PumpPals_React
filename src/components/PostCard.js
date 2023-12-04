@@ -6,6 +6,7 @@ import {
   getUsername,
   commentPost,
 } from "../Util/ServerConnector.js";
+import { Link } from "react-router-dom";
 
 function PostCard({ post }) {
   const {
@@ -36,7 +37,10 @@ function PostCard({ post }) {
 
   useEffect(() => {
     const fetchProfilePicture = async () => {
-      const imageUrl = await getProfilePicture(username);
+      let imageUrl = await getProfilePicture(username);
+      if (imageUrl === null) {
+        imageUrl = process.env.PUBLIC_URL + "/account_icon.svg";
+      }
       setProfilePicture(imageUrl);
     };
     const fetchUsername = async () => {
@@ -70,7 +74,9 @@ function PostCard({ post }) {
       <div className="post-bar">
         <img src={profilePicture} className="pfp" alt="Profile Picture" />
         <p>{name}</p>
-        <p>{username}</p>
+        <p>
+          <Link to={`/user/${username}`}>{username}</Link>
+        </p>
         <p>{formattedDate}</p>
       </div>
       <div className="msg">

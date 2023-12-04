@@ -6,7 +6,7 @@ import { login, getUsername, loginStillValid} from "../Util/ServerConnector.js";
 // Then gonna have a button or two, then gonna have a link for signup (if don't do second button right).
 
 // Look at 'Experimental-Michael' on Github; just gonna follow Joshua's example for Login.
-function LoginForm() {
+function LoginForm({ setIsLoggedIn }) {
   const [loggedIn, setLoginInfo] = useState(null);
   const [errorState, setErrorState] = useState(false);
   // used to redirect to the home page after login
@@ -45,6 +45,7 @@ useEffect(() => {
     );
     if (bool) {
       setLoginInfo(getUsername());
+      setIsLoggedIn(true);
       // redirect to home page
       navigate("/");
     } else hasError();

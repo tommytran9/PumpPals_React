@@ -79,7 +79,8 @@ export async function createUser(
   gender,
   weight,
   height,
-  fitnessGoals
+  fitnessGoals,
+  bio
 ) {
   let { status, data } = await Axios.post("/api/create", {
     username,
@@ -90,6 +91,7 @@ export async function createUser(
     weight,
     height,
     fitnessGoals,
+    bio,
   });
 
   console.log(
@@ -100,7 +102,8 @@ export async function createUser(
     gender,
     weight,
     height,
-    fitnessGoals
+    fitnessGoals,
+    bio,
   );
   if (status !== 200) return { success: false, response: data };
 
@@ -179,6 +182,9 @@ export async function getProfilePicture(username) {
       responseType: "arraybuffer",
       ...(await createAuthHeader()),
     });
+    if (response.status !== 200) {
+      return null;
+    }
     const imageBytes = new Uint8Array(response.data);
     const blob = new Blob([imageBytes], { type: "image/png" });
     const imageUrl = URL.createObjectURL(blob);
@@ -341,39 +347,36 @@ export async function getUserByUsername(username) {
  * @returns {{success:boolean, response:String}}
  */
 export async function updateUser(
-  username,
-  password,
   name,
   dateOfBirth,
   gender,
   weight,
   height,
-  fitnessGoals
+  fitnessGoals,
+  bio,
 ) {
-  let { status, data } = await Axios.post(
-    "/api/create",
+  let { status, data } = await Axios.put(
+    "/api/user/update",
     {
-      username,
-      password,
       name,
       dateOfBirth,
       gender,
       weight,
       height,
       fitnessGoals,
+      bio,
     },
     await createAuthHeader()
   );
 
   console.log(
-    username,
-    password,
     name,
     dateOfBirth,
     gender,
     weight,
     height,
-    fitnessGoals
+    fitnessGoals,
+    bio,
   );
   if (status !== 200) return { success: false, response: data };
 
@@ -408,5 +411,15 @@ export async function isFollowing(username) {
     `/api/user/checkfollow/${username}`,
     await createAuthHeader()
   );
+  return response.data;
+}
+
+// returns a list of recommended users
+export async function getRecommendedUsers() {
+  const response = await Axios.get(
+    "/api/user/recommended",
+    await createAuthHeader()
+  );
+  console.log(response.data);
   return response.data;
 }

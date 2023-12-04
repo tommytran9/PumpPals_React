@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createUser } from "../Util/ServerConnector.js";
 import { useNavigate } from "react-router-dom";
 
-const CreateAccount = () => {
+const CreateAccount = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -11,6 +11,7 @@ const CreateAccount = () => {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
   const [fitnessGoals, setFitnessGoals] = useState([]);
+  const [bio, setBio] = useState(""); // Added bio state
   const [validationErrors, setValidationErrors] = useState([]);
   const navigate = useNavigate();
 
@@ -18,8 +19,6 @@ const CreateAccount = () => {
   const validateForm = () => {
     const errors = [];
 
-    // Add your validation checks here
-    // For example:
     const specialCharsRegex = /[!@#$%^&*(),.?":{}|<>\/\\]/;
 
     if (!username) {
@@ -64,13 +63,13 @@ const CreateAccount = () => {
     return errors;
   };
 
-const hasError = (errorMessage) => {
-  if (typeof errorMessage === "object") {
-    errorMessage = JSON.stringify(errorMessage);
-  }
-  console.log(errorMessage);
-  alert(errorMessage);
-};
+  const hasError = (errorMessage) => {
+    if (typeof errorMessage === "object") {
+      errorMessage = JSON.stringify(errorMessage);
+    }
+    console.log(errorMessage);
+    alert(errorMessage);
+  };
 
   const handleFitnessGoalChange = (e) => {
     if (e.target.checked) {
@@ -82,172 +81,205 @@ const hasError = (errorMessage) => {
     }
   };
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  const errors = validateForm();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errors = validateForm();
 
-  if (errors.length > 0) {
-    return;
-  }
-
-  // Convert weight and height to integers
-  const weightInt = parseInt(weight, 10);
-  const heightInt = parseInt(height, 10);
-
-  // Call the createUser function from ServerConnector.js
-  createUser(
-    username,
-    password,
-    name,
-    dateOfBirth,
-    gender,
-    weightInt,
-    heightInt,
-    fitnessGoals
-  ).then((response) => {
-    // added opening parenthesis before response
-    if (response.success) {
-      // Redirect to the home page
-      navigate("/");
-    } else {
-      hasError(response.response);
-      console.log(response.response);
+    if (errors.length > 0) {
+      return;
     }
-  });
-};
+
+    // Convert weight and height to integers
+    const weightInt = parseInt(weight, 10);
+    const heightInt = parseInt(height, 10);
+
+    // Call the createUser function from ServerConnector.js
+    createUser(
+      username,
+      password,
+      name,
+      dateOfBirth,
+      gender,
+      weightInt,
+      heightInt,
+      fitnessGoals,
+      bio
+    ).then((response) => {
+      // added opening parenthesis before response
+      if (response.success) {
+        setIsLoggedIn(true);
+        // Redirect to the home page
+        navigate("/profile");
+      } else {
+        hasError(response.response);
+        console.log(response.response);
+      }
+    });
+  };
 
   return (
     <>
-      <div>
+      <div style={{ display: "flex", flexDirection: "column" }}>
         <h2>Create Account</h2>
         <form onSubmit={handleSubmit}>
-          <label>
-            Username:
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Password:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Name:
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Date of Birth:
-            <input
-              type="date"
-              value={dateOfBirth}
-              onChange={(e) => setDateOfBirth(e.target.value)}
-            />
-          </label>
-          <label>
-            Gender:
-            <input
-              type="radio"
-              value="Male"
-              checked={gender === "Male"}
-              onChange={(e) => setGender(e.target.value)}
-            />{" "}
-            Male
-            <input
-              type="radio"
-              value="Female"
-              checked={gender === "Female"}
-              onChange={(e) => setGender(e.target.value)}
-            />{" "}
-            Female
-            <input
-              type="radio"
-              value="Other"
-              checked={gender === "Other"}
-              onChange={(e) => setGender(e.target.value)}
-            />{" "}
-            Other
-          </label>
-          <br />
-          <label>
-            Weight:
-            <input
-              type="number"
-              value={weight}
-              onChange={(e) => setWeight(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Height:
-            <input
-              type="number"
-              value={height}
-              onChange={(e) => setHeight(e.target.value)}
-            />
-            <label>
-              <br />
-              Fitness Goals:
-              <br />
+          <div>
+            <div>
               <label>
+                Username:
                 <input
-                  type="checkbox"
-                  name="fitnessGoals"
-                  value="Weightloss"
-                  checked={fitnessGoals.includes("Weightloss")}
-                  onChange={handleFitnessGoalChange}
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
-                Weightloss
               </label>
-              <br />
+            </div>
+            <br /> {/* Add spacing */}
+            <div>
               <label>
+                Password:
                 <input
-                  type="checkbox"
-                  name="fitnessGoals"
-                  value="Muscle gain"
-                  checked={fitnessGoals.includes("Muscle gain")}
-                  onChange={handleFitnessGoalChange}
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
-                Muscle gain
               </label>
-              <br />
+            </div>
+          </div>
+          <br /> {/* Add spacing */}
+          <div>
+            <div>
               <label>
+                Name:
                 <input
-                  type="checkbox"
-                  name="fitnessGoals"
-                  value="General health"
-                  checked={fitnessGoals.includes("General health")}
-                  onChange={handleFitnessGoalChange}
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
-                General health
               </label>
-              <br />
+            </div>
+            <br /> {/* Add spacing */}
+            <div>
               <label>
+                Date of Birth:
                 <input
-                  type="checkbox"
-                  name="fitnessGoals"
-                  value="Sports"
-                  checked={fitnessGoals.includes("Sports")}
-                  onChange={handleFitnessGoalChange}
+                  type="date"
+                  value={dateOfBirth}
+                  onChange={(e) => setDateOfBirth(e.target.value)}
                 />
-                Sports
               </label>
-              <br />
-            </label>
-          </label>
-          <br />
+            </div>
+            <br /> {/* Add spacing */}
+            <div>
+              <label>
+                Gender:
+                <input
+                  type="radio"
+                  value="Male"
+                  checked={gender === "Male"}
+                  onChange={(e) => setGender(e.target.value)}
+                />{" "}
+                Male
+                <input
+                  type="radio"
+                  value="Female"
+                  checked={gender === "Female"}
+                  onChange={(e) => setGender(e.target.value)}
+                />{" "}
+                Female
+                <input
+                  type="radio"
+                  value="Other"
+                  checked={gender === "Other"}
+                  onChange={(e) => setGender(e.target.value)}
+                />{" "}
+                Other
+              </label>
+            </div>
+            <br /> {/* Add spacing */}
+            <div>
+              <label>
+                Weight:
+                <input
+                  type="number"
+                  value={weight}
+                  onChange={(e) => setWeight(e.target.value)}
+                />
+              </label>
+            </div>
+            <br /> {/* Add spacing */}
+            <div>
+              <label>
+                Height:
+                <input
+                  type="number"
+                  value={height}
+                  onChange={(e) => setHeight(e.target.value)}
+                />
+              </label>
+            </div>
+            <br /> {/* Add spacing */}
+            <div>
+              <label>
+                Bio: {/* Added bio input field */}
+                <textarea
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                />
+              </label>
+            </div>
+            <br /> {/* Add spacing */}
+            <div>
+              <label>
+                Fitness Goals:
+                <br />
+                <label>
+                  <input
+                    type="checkbox"
+                    name="fitnessGoals"
+                    value="Weightloss"
+                    checked={fitnessGoals.includes("Weightloss")}
+                    onChange={handleFitnessGoalChange}
+                  />
+                  Weightloss
+                </label>
+                <br />
+                <label>
+                  <input
+                    type="checkbox"
+                    name="fitnessGoals"
+                    value="Muscle gain"
+                    checked={fitnessGoals.includes("Muscle gain")}
+                    onChange={handleFitnessGoalChange}
+                  />
+                  Muscle gain
+                </label>
+                <br />
+                <label>
+                  <input
+                    type="checkbox"
+                    name="fitnessGoals"
+                    value="General health"
+                    checked={fitnessGoals.includes("General health")}
+                    onChange={handleFitnessGoalChange}
+                  />
+                  General health
+                </label>
+                <br />
+                <label>
+                  <input
+                    type="checkbox"
+                    name="fitnessGoals"
+                    value="Sports"
+                    checked={fitnessGoals.includes("Sports")}
+                    onChange={handleFitnessGoalChange}
+                  />
+                  Sports
+                </label>
+                <br />
+              </label>
+            </div>
+          </div>
+          <br /> {/* Add spacing */}
           <button type="submit">Create Account</button>
         </form>
       </div>

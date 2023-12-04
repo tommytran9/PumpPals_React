@@ -9,7 +9,10 @@ function UserCard({ userPost }) {
 
   useEffect(() => {
     const fetchProfilePicture = async () => {
-      const imageUrl = await getProfilePicture(username);
+      let imageUrl = await getProfilePicture(username);
+      if (imageUrl === null) {
+        imageUrl = process.env.PUBLIC_URL + "/account_icon.svg";
+      }
       setProfilePicture(imageUrl);
     };
 
