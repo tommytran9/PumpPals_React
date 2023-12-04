@@ -98,7 +98,7 @@ body {
   justify-content: center;
   align-items: center;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  color: #41a38a;
+  color: #09b6fe;
 }
 
 #loginText {
@@ -114,6 +114,13 @@ body {
 form {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+#LoginModal form {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 10px;
@@ -149,14 +156,14 @@ form {
 }
 
 #modalButtons button:first-of-type {
-  background-color: #4CAF50;
+  background-color: #09b6fe;
   color: white;
   padding: 10px 20px;
 }
 
 #modalButtons button:last-of-type {
   background-color: transparent;
-  color: #4CAF50;
+  color: #09b6fe;
   padding: 5px 0;
 }
 
@@ -182,3 +189,66 @@ form {
   
 }
 
+#create-account-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%; /* Adjust the width as necessary */
+  margin: auto;
+  padding: 20px;
+  background-color: #fff; /* White background for the form */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft shadow around the form */
+  border-radius: 8px; /* Rounded corners */
+  positon: absolute;
+}
+
+#create-account-title {
+  text-align: center;
+  font-size: 24px; /* Large font size for the title */
+  color: #333; /* Dark grey color for the text */
+  margin-bottom: 20px; /* Space below the title */
+}
+
+
+#create-account-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between form items */
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-section {
+  /* Your styles for each form section */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column; /* Stack labels on top of inputs */
+}
+
+.form-input {
+  font-size: 16px; /* Larger font size for readability */
+  padding: 10px; /* Padding inside the inputs */
+  margin-bottom: 10px; /* Space below each input */
+  border: 1px solid #ccc; /* Light grey border */
+  border-radius: 4px; /* Slightly rounded borders for the inputs */
+}
+
+#create-account-button {
+  background-color: #17a2b8; /* Teal background color for the button */
+  color: white; /* White text color */
+  padding: 15px 20px; /* Padding inside the button */
+  font-size: 18px; /* Larger font size for the button text */
+  border: none; /* No border for the button */
+  border-radius: 4px; /* Rounded corners for the button */
+  cursor: pointer; /* Cursor to indicate it's clickable */
+  margin-top: 10px; /* Space above the button */
+}
+
+#validation-errors .error-message {
+  color: red; /* Red color for error messages */
+  font-size: 14px; /* Smaller font size for error messages */
+  margin-top: 5px; /* Space above error messages */
+  align: center;
+}
