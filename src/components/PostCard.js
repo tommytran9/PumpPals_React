@@ -1,51 +1,160 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
+import {
+  getProfilePicture,
+  likePost,
+  unlikePost,
+  getUsername,
+  commentPost,
+} from "../Util/ServerConnector.js";
+import { Link } from "react-router-dom";
 
 function PostCard({ post }) {
-    const { pfp, author, date, message } = post;
+  const {
+    pfp,
+    name,
+    username,
+    postId,
+    uploadDate,
+    content,
+    likes,
+    comments,
+    commenters,
+    likers,
+  } = post;
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [user, setUser] = useState("");
+  const [comment, setComment] = useState("");
+  const [allComments, setAllComments] = useState([]); // Added line
 
-    //Like button function
-    function LikeButton () {
-        const [likes, setLikes] = useState(0);
-        const [activeBtn, setActiveBtn] = useState("none");
+  useEffect(() => {
+    const newComments = comments.map((comment, i) => ({
+      comment: comment,
+      commenter: commenters[i],
+    }));
 
-        const handleLikeClick = () => {
-            if (activeBtn === "none") {
-                setLikes(likes + 1);
-                setActiveBtn("like");
-                return;
-            }
-    
-            if (activeBtn === "like") {
-                setLikes(likes - 1);
-                setActiveBtn("none");
-                return;
-            }
-        };
+    setAllComments(newComments);
+  }, [comments, commenters]);
 
-        return (
-            <button className={`btn ${activeBtn === 'like' ? 'like-active' : ''}`} onClick={handleLikeClick}>
-                <img src="thumb_up.svg" alt="Thumbs up sign" />
-                {likes}
-            </button>
-        );
-        
-    }
+  useEffect(() => {
+    const fetchProfilePicture = async () => {
+      let imageUrl = await getProfilePicture(username);
+      if (imageUrl === null) {
+        imageUrl = process.env.PUBLIC_URL + "/account_icon.svg";
+      }
+      setProfilePicture(imageUrl);
+    };
+    const fetchUsername = async () => {
+      const response = await getUsername();
+      const user = response.data;
+      setUser(user);
+    };
+
+    fetchUsername();
+    fetchProfilePicture();
+  }, []);
+
+  const formattedDate = new Date(uploadDate).toLocaleDateString();
+
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
+  };
+
+  const handleCommentSubmit = () => {
+    const newComment = {
+      comment: comment,
+      commenter: user,
+    };
+    commentPost(postId, newComment);
+    setAllComments([...allComments, newComment]);
+    setComment("");
+  };
+
+  return (
+    <div id="PostCardDiv">
+      <div className="post-bar">
+        <img src={profilePicture} className="pfp" alt="Profile Picture" />
+        <p>{name}</p>
+        <p>
+          <Link to={`/user/${username}`}>{username}</Link>
+        </p>
+        <p>{formattedDate}</p>
+      </div>
+      <div className="msg">
+        <p>{content}</p>
+      </div>
+      <div id="like">
+        <LikeButton />
+      </div>
+      <div id="comment">
+        <textarea
+          value={comment}
+          onChange={handleCommentChange}
+          placeholder="Enter your comment..."
+        ></textarea>
+        <button onClick={handleCommentSubmit}>Comment</button>
+      </div>
+      <div id="comments">
+        {allComments.map((comment, index) => {
+          let parsedComment;
+          try {
+            parsedComment = JSON.parse(comment.comment);
+          } catch (e) {
+            parsedComment = {
+              comment: comment.comment,
+              commenter: comment.commenter,
+            };
+          }
+          return (
+            <div key={index} className="comment-container">
+              <div className="commenter">
+                <p>
+                  <strong>{parsedComment.commenter}</strong>
+                </p>
+              </div>
+              <div className="comment">
+                <p>{parsedComment.comment}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+
+  function LikeButton() {
+    const [likes, setLikes] = useState(post.likes || 0);
+    const likers = post.likers || [];
+    const [activeBtn, setActiveBtn] = useState(
+      likers.includes(user) ? "like" : "none"
+    );
+
+    const handleLikeClick = () => {
+      if (activeBtn === "none") {
+        likePost(postId);
+        setLikes(likes + 1);
+        setActiveBtn("like");
+        return;
+      } else if (activeBtn === "like") {
+        unlikePost(postId);
+        setLikes(likes - 1);
+        setActiveBtn("none");
+        return;
+      }
+    };
 
     return (
-        <div id="PostCardDiv">
-            <div className="post-bar">
-                <img src={pfp} className="pfp" alt="Profile Picture" />
-                <p>{author}</p>
-                <p>{date}</p>
-            </div>
-            <div className="msg">
-                <p>{message}</p>
-            </div>
-            <div id="like">
-                <LikeButton />
-            </div>
-        </div>
-    )
+      <button
+        className={`btn ${activeBtn === "like" ? "like-active" : ""}`}
+        onClick={handleLikeClick}
+      >
+        <img
+          src={process.env.PUBLIC_URL + "/thumb_up.svg"}
+          alt="Thumbs up sign"
+        />{" "}
+        {likes}
+      </button>
+    );
+  }
 }
 
 export default PostCard;

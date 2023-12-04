@@ -2,15 +2,15 @@ import PostCard from "../components/PostCard";
 import UserCard from "../components/UserCard";
 import StatCard from "../components/StatCard";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   loginStillValid,
   getPostsByUsername,
   getUserByUsername,
-  getUsername,
 } from "../Util/ServerConnector.js";
 
-function Profile() {
+function User() {
+  const { username } = useParams();
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(null); // Initialize user as null
@@ -24,9 +24,6 @@ function Profile() {
         return;
       }
 
-      const response = await getUsername();
-      const username = response.data;
-      console.log(username);
       const user = await getUserByUsername(username);
       setUser(user);
 
@@ -59,10 +56,10 @@ function Profile() {
   }
 
   return (
-    <div className="Profile">
+    <div className="User">
       <div className="container">
         <div id="profile-user-bar">
-          <h2>Profile</h2>
+          <h2>User</h2>
           {renderUser()}
           <h2>Personal Statistics</h2>
           {renderStats()}
@@ -76,4 +73,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default User;

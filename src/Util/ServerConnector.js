@@ -71,18 +71,40 @@ function autoRefreshToken(time = TOKEN_REFRESH_TIME) {
  * @param {String} password
  * @returns {{success:boolean, response:String}}
  */
-export async function createUser(username, password, name, dateOfBirth, age, weight, height, fitnessGoals) {
+export async function createUser(
+  username,
+  password,
+  name,
+  dateOfBirth,
+  gender,
+  weight,
+  height,
+  fitnessGoals,
+  bio
+) {
   let { status, data } = await Axios.post("/api/create", {
     username,
     password,
     name,
     dateOfBirth,
-    age,
+    gender,
     weight,
     height,
     fitnessGoals,
+    bio,
   });
 
+  console.log(
+    username,
+    password,
+    name,
+    dateOfBirth,
+    gender,
+    weight,
+    height,
+    fitnessGoals,
+    bio,
+  );
   if (status !== 200) return { success: false, response: data };
 
   return await login(username, password);
@@ -113,164 +135,291 @@ export async function login(username, password) {
   return { success: false, response: data };
 }
 
-/**
- * Deletes the user account
- * @returns {{success:boolean, response:String}}
- */
-export async function deleteAccount() {
-  let { data, status } = await Axios.delete(
-    "/api/delete",
-    await createAuthHeader(),
-    {}
-  );
-
-  return { success: true, response: data };
-}
-
-/**
- * gets all files in the users directory
- * @returns {{success:boolean, response:String}}
- */
-export async function getDirectory() {
-  let { data, status } = await Axios.get(
-    "/api/user/listFiles",
-    await createAuthHeader(),
-    { loggedIn: await checkLock() }
-  );
-  return { success: status === 200, response: data };
-}
-
-/**
- * uploads a file to the server
- * @param {String} directory
- * @param {File} file
- * @returns {{success:boolean, response:String}}
- */
-export async function uploadFile(directory, file) {
-  let currentTime = Date.now();
-
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("directory", directory);
-
-  let { data, status } = await Axios.post("/api/user/upload", formData, {
-    ...(await createAuthHeader()),
-    body: { loggedIn: await checkLock() },
-  });
-
-  console.log(Date.now() - currentTime + " ms taken for upload");
-
-  return { success: status === 200, response: data };
-}
-
-/**
- * deletes a file in the server
- * @param {String} directory
- * @param {File} file
- * @returns {{success:boolean, response:String}}
- */
-export async function deleteFile(name, directory) {
-  let { data, status } = await Axios.delete("/api/user/deleteFile", {
-    data: { name, directory },
-    ...(await createAuthHeader()),
-  });
-  return { success: status === 200, response: data };
-}
-
-/**
- * deletes a folder in the server
- * @param {String} directory
- * @param {File} file
- * @returns {{success:boolean, response:String}}
- */
-export async function deleteFolder(name, directory) {
-  let { data, status } = await Axios.delete("/api/user/deleteFolder", {
-    data: { name, directory },
-    ...(await createAuthHeader()),
-  });
-  return { success: status === 200, response: data };
-}
-
-/**
- * downloads a file
- * @param {String} directory
- * @param {File} file
- * @returns {{success:boolean, response:String}}
- */
-export async function downloadFile(filename, directory) {
-  let currentTime = Date.now();
-  const response = await fetch(
-    `/api/user/download?filename=${encodeURIComponent(
-      filename
-    )}&directory=${encodeURIComponent(directory)}&loggedIn=${encodeURIComponent(
-      await checkLock()
-    )}`,
-    {
-      headers: (await createAuthHeader()).headers,
-      method: "GET",
-      credentials: "include",
-    }
-  );
-
-  if (response.ok) {
-    try {
-      const reader = response.body.getReader();
-      const stream = new ReadableStream({
-        start(controller) {
-          function push() {
-            reader.read().then(({ done, value }) => {
-              if (done) {
-                controller.close();
-                return;
-              }
-              controller.enqueue(value);
-              push();
-            });
-          }
-          push();
-        },
-      });
-
-      const blob = await new Response(stream).blob();
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (e) {
-      console.log("internal downloading error");
-      return {
-        success: false,
-        response: "Internal Failure, Browser Incompatible",
-      };
-    }
-  }
-
-  console.log(Date.now() - currentTime + " ms taken for download");
-
-  return { success: response.ok, response: response.statusText };
-}
-
-/**
- * Creates a new folder in the specified directory
- * @param {String} name
- * @param {String} directory
- * @returns {{success:boolean, response:String}}
- */
-export async function createFolder(name, directory) {
-  let { data, status } = await Axios.post(
-    "/api/user/newfolder",
-    { name, directory, loggedIn: await checkLock() },
-    await createAuthHeader()
-  );
-  return { success: status === 200, response: data };
-}
-
 export async function getUsername() {
   let { data, status } = await Axios.get(
     "/api/user/username",
     await createAuthHeader()
   );
-  return { success: status === 200, response: data };
+  return { data };
+}
+
+/**
+ * Uploads a profile picture
+ * @param {File} file - The profile picture file
+ * @returns {{success:boolean, response:String}}
+ */
+export async function uploadProfilePicture(file) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    const response = await Axios.put(
+      "/api/pfp",
+      formData,
+      await createAuthHeader()
+    );
+    return { success: true, response: response.data };
+  } catch (error) {
+    if (error.response) {
+      return { success: false, response: error.response.data };
+    } else {
+      return { success: false, response: "Failed to upload profile picture." };
+    }
+  }
+}
+
+/**
+ * Retrieves the profile picture for a given username
+ * @param {String} username - The username of the user
+ * @returns {Promise<String>} - The URL of the profile picture
+ */
+export async function getProfilePicture(username) {
+  const fileExtension = "png";
+  const targetLocation = `/api/pfp/${username}.${fileExtension}`;
+
+  try {
+    const response = await Axios.get(targetLocation, {
+      responseType: "arraybuffer",
+      ...(await createAuthHeader()),
+    });
+    if (response.status !== 200) {
+      return null;
+    }
+    const imageBytes = new Uint8Array(response.data);
+    const blob = new Blob([imageBytes], { type: "image/png" });
+    const imageUrl = URL.createObjectURL(blob);
+    return imageUrl;
+  } catch (error) {
+    console.error("Failed to retrieve profile picture:", error);
+    return null;
+  }
+}
+
+// returns a list of all recent posts
+export async function getAllPosts() {
+  try {
+    const response = await Axios.get("/api/posts", await createAuthHeader());
+    return response.data;
+  } catch (error) {
+    console.error("Failed to get all posts:", error);
+    return [];
+  }
+}
+
+// returns a list of all posts by a user
+export async function getPostsByUsername(username) {
+  try {
+    const response = await Axios.get(
+      `/api/posts/${username}`,
+      await createAuthHeader()
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Failed to get posts by username:", error);
+    return [];
+  }
+}
+
+// creates a new post
+export async function createPost(post) {
+  try {
+    const response = await Axios.post(
+      "/api/posts/create",
+      post,
+      await createAuthHeader()
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Failed to create post:", error);
+    return null;
+  }
+}
+
+// updates a post
+export async function updatePost(post) {
+  try {
+    const response = await Axios.put(
+      "/api/posts/update",
+      post,
+      await createAuthHeader()
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Failed to update post:", error);
+    return null;
+  }
+}
+
+// deletes a post
+export async function deletePost(id) {
+  try {
+    await Axios.delete(`/api/posts/delete/${id}`, await createAuthHeader());
+  } catch (error) {
+    console.error("Failed to delete post:", error);
+  }
+}
+
+// returns a list of posts that a user follows
+export async function getFollowingPosts() {
+  try {
+    const response = await Axios.get(
+      "/api/posts/following",
+      await createAuthHeader()
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Failed to get following posts:", error);
+    return [];
+  }
+}
+
+// likes a post
+export async function likePost(id) {
+  try {
+    await Axios.put(`/api/posts/like/${id}`, null, await createAuthHeader());
+  } catch (error) {
+    console.error("Failed to like post:", error);
+  }
+}
+
+// unlikes a post
+export async function unlikePost(id) {
+  try {
+    await Axios.put(`/api/posts/unlike/${id}`, null, await createAuthHeader());
+  } catch (error) {
+    console.error("Failed to unlike post:", error);
+  }
+}
+
+// comments on a post
+export async function commentPost(id, comment) {
+  try {
+    await Axios.put(
+      `/api/posts/comment/${id}`,
+      comment,
+      await createAuthHeader()
+    );
+  } catch (error) {
+    console.error("Failed to comment on post:", error);
+  }
+}
+
+// uncomments on a post
+export async function uncommentPost(id, comment) {
+  try {
+    await Axios.put(
+      `/api/posts/uncomment/${id}`,
+      comment,
+      await createAuthHeader()
+    );
+  } catch (error) {
+    console.error("Failed to uncomment on post:", error);
+  }
+}
+
+/**
+ * Retrieves user information by username
+ * @param {String} username - The username of the user
+ * @returns {Promise<ResponseEntity<Optional<UserInfo>>>} - The user information
+ */
+export async function getUserByUsername(username) {
+  try {
+    const response = await Axios.get(
+      `/api/user/${username}`,
+      await createAuthHeader()
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Failed to get user by username:", error);
+    return null;
+  }
+}
+
+/**
+ * Create an account and login
+ * @param {String} username
+ * @param {String} password
+ * @param {String} name
+ * @param {String} dateOfBirth
+ * @param {Number} weight
+ * @param {Number} height
+ * @param {String} fitnessGoals
+ * @returns {{success:boolean, response:String}}
+ */
+export async function updateUser(
+  name,
+  dateOfBirth,
+  gender,
+  weight,
+  height,
+  fitnessGoals,
+  bio,
+) {
+  let { status, data } = await Axios.put(
+    "/api/user/update",
+    {
+      name,
+      dateOfBirth,
+      gender,
+      weight,
+      height,
+      fitnessGoals,
+      bio,
+    },
+    await createAuthHeader()
+  );
+
+  console.log(
+    name,
+    dateOfBirth,
+    gender,
+    weight,
+    height,
+    fitnessGoals,
+    bio,
+  );
+  if (status !== 200) return { success: false, response: data };
+
+  // Additional code here if needed
+
+  return { success: true, response: data };
+}
+
+// follow user
+export async function followUser(username) {
+  const response = await Axios.put(
+    `/api/user/follow/${username}`,
+    null,
+    await createAuthHeader()
+  );
+  return response.data;
+}
+
+// unfollow user
+export async function unfollowUser(username) {
+  const response = await Axios.put(
+    `/api/user/unfollow/${username}`,
+    null,
+    await createAuthHeader()
+  );
+  return response.data;
+}
+
+// checks if user is following another user
+export async function isFollowing(username) {
+  const response = await Axios.get(
+    `/api/user/checkfollow/${username}`,
+    await createAuthHeader()
+  );
+  return response.data;
+}
+
+// returns a list of recommended users
+export async function getRecommendedUsers() {
+  const response = await Axios.get(
+    "/api/user/recommended",
+    await createAuthHeader()
+  );
+  console.log(response.data);
+  return response.data;
 }
