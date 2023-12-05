@@ -11,6 +11,7 @@ import EditProfile from "./pages/EditProfile";
 import CreatePost from "./pages/CreatePost";
 import Logout from "./pages/Logout";
 import User from "./pages/User";
+import LogWorkout from "./pages/LogWorkout";
 import React, { useState } from "react";
 
 /*
@@ -68,6 +69,7 @@ function App() {
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/log-workout" element={<LogWorkout />} />
         </Routes>
       </div>
     </div>

@@ -38,6 +38,7 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
         {isLoggedIn ? (
           <>
             <CustomLink to="/create-post">Create Post</CustomLink>
+            <CustomLink to="/log-workout">Log Workout</CustomLink>
             <CustomLink to="/logout" onClick={handleLogout}>
               Logout
             </CustomLink>

@@ -477,3 +477,51 @@ export async function getRecommendedUsers() {
   console.log(response.data);
   return response.data;
 }
+
+// get all workouts
+export async function getAllWorkouts() {
+  const response = await Axios.get('/api/workout/all', await createAuthHeader());
+  return response.data;
+}
+
+// get all workouts for a user
+export async function getWorkoutsByUsername(username) {
+  const response = await Axios.get(`/api/workout/${username}`, await createAuthHeader());
+  return response.data;
+}
+
+// get a workout by workoutId
+export async function getWorkoutByWorkoutId(workoutId) {
+  const response = await Axios.get(`/api/workout/id/${workoutId}`, await createAuthHeader());
+  return response.data;
+}
+
+// get a workout by username and date
+export async function getWorkoutByUsernameAndDate(username, date) {
+  const response = await Axios.get(`/api/workout/${username}/${date}`, await createAuthHeader());
+  return response.data;
+}
+
+// get all workouts for a date
+export async function getWorkoutsByDate(date) {
+  const response = await Axios.get(`/api/workout/date/${date}`, await createAuthHeader());
+  return response.data;
+}
+
+// create a workout
+export async function createWorkout(workout) {
+  const response = await Axios.post('/api/workout/create', workout, await createAuthHeader());
+  return response.data;
+}
+
+// get user workouts
+export async function getUserWorkouts() {
+  const response = await Axios.get('/api/workout/user', await createAuthHeader());
+  return response.data;
+}
+
+// get workouts from users the user follows
+export async function getFollowingWorkouts() {
+  const response = await Axios.get('/api/workout/following', await createAuthHeader());
+  return response.data;
+}
