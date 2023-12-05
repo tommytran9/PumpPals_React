@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getUsername, getProfilePicture, followUser, unfollowUser, isFollowing } from "../Util/ServerConnector.js";
 
 function UserCard({ userPost }) {
@@ -49,7 +50,9 @@ function UserCard({ userPost }) {
     <div id="UserCard">
       <div className="post-bar">
         <img src={profilePicture} className="pfp" alt="Profile Picture" />
-        <p>{name}</p>
+        <p>
+          <Link to={`/user/${username}`}>{name}</Link>
+        </p>
       </div>
       <div>
         <p>{bio}</p>
@@ -60,7 +63,9 @@ function UserCard({ userPost }) {
             <button>Edit Profile</button>
           </a>
         ) : (
-          <button onClick={handleFollow}>{followed ? "following" : "follow"}</button>
+          <button onClick={handleFollow}>
+            {followed ? "following" : "follow"}
+          </button>
         )}
       </div>
     </div>

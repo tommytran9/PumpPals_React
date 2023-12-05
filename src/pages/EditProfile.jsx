@@ -77,7 +77,8 @@ const EditProfile = () => {
       {errorMessage && <p>{errorMessage.message}</p>} {/* Display the error message */}
       <form onSubmit={handleFormSubmit}>
         <div>
-          <label>Profile Picture:</label>
+          <label>Profile Picture</label> <br />
+          <label>Only .png, .jpg, and .jpeg are supported</label>
           <input type="file" onChange={handleProfilePictureChange} />
         </div>
         <div>
