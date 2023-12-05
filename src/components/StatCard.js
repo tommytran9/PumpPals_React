@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import React from "react";
+
 
 function StatCard({ stat }) {
   const { dateOfBirth, height, weight, fitnessGoals, gender } = stat;
@@ -17,13 +19,30 @@ function StatCard({ stat }) {
 
   return (
     <div className="StatCard">
-      <ul>
-        <li>Age: {age}</li>
-        <li>Gender: {gender}</li>
-        <li>Height: {height}</li>
-        <li>Weight: {weight}</li>
-        <li>Fitness Goals: {fitnessGoals}</li>
-      </ul>
+      <table>
+        <tbody>
+          <tr>
+            <td style={{ textAlign: "left" }}><strong>Age:</strong></td>
+            <td style={{ textAlign: "left" }}>{age}</td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "left" }}><strong>Gender:</strong></td>
+            <td style={{ textAlign: "left" }}>{gender}</td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "left" }}><strong>Height:</strong></td>
+            <td style={{ textAlign: "left" }}>{height}</td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "left" }}><strong>Weight:</strong></td>
+            <td style={{ textAlign: "left" }}>{weight}</td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "left" }}><strong>Fitness Goals:</strong></td>
+            <td style={{ textAlign: "left" }}>{fitnessGoals.join(", ")}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }

@@ -7,7 +7,7 @@ import {
   commentPost,
   getPostPicture, // Added line
 } from "../Util/ServerConnector.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function PostCard({ post }) {
   const {
@@ -140,7 +140,14 @@ function PostCard({ post }) {
             <div key={index} className="comment-container">
               <div className="commenter">
                 <p>
-                  <strong>{parsedComment.commenter}</strong>
+                  <strong>
+                    <Link
+                      to={`/user/${parsedComment.commenter}`}
+                      key={parsedComment.commenter}
+                    >
+                      {parsedComment.commenter}
+                    </Link>
+                  </strong>
                 </p>
               </div>
               <div className="comment">
