@@ -11,7 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-,
+
 * {
   box-sizing: border-box;
 }
@@ -60,65 +60,6 @@ body {
 .navbar li:hover {
   background-color: #777;
 }
-
-
-/* Styles for the dropdown button */
-.navbar .dropdown-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: white;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  text-align: left;
-}
-
-/* Styles for the dropdown menu container */
-.navbar .dropdown-menu {
-  display: none; /* Initially don't display the dropdown */
-  flex-direction: column;
-  position: absolute;
-  top: 100%; /* Position it below the dropdown button */
-  left: 0;
-  background-color: #333; 
-  min-width: 160px; /* Minimum width of the dropdown */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow effect */
-  border-radius: 4px; /* Rounded corners */
-  padding: 0.5rem 0; /* Padding inside the dropdown */
-}
-
-/* Styles for each dropdown item */            
-.navbar .dropdown-item {
-  color: white;
-  padding: 0.5rem 1rem;
-  text-decoration: none;
-  display: block;
-  transition: background-color 0.2s ease-in-out;
-}
-
-/* Hover state for dropdown items */
-.navbar .dropdown-item:hover {
-  background-color: #474747; /* Dark grey background for item hover */
-}
-
-/* Separator style */
-.navbar .dropdown-divider {
-  height: 1px;
-  margin: 0.5rem 0;
-  overflow: hidden;
-  background-color: #474747;
-}
-
-/* Display the dropdown menu when hovering over the dropdown button */
-.navbar li:hover > .dropdown-menu {
-  display: flex;
-}
-
-.navbar ul {
-  align-items: center;
-  position: relative; /* Needed for absolute positioning of dropdown */
-}
-
 
 #LoginForm {
   position: absolute;
@@ -243,67 +184,71 @@ form {
 }
 
 .search-button img{
-  width: 20px;       
-  height: 20px;      
+  width: 20px;       /* Width of the image */
+  height: 20px;      /* Height of the image */
   
 }
 
 #create-account-container {
   display: flex;
   flex-direction: column;
-  width: 75%; 
-  height:50%;
+  width: 50%; /* Adjust the width as necessary */
   margin: auto;
   padding: 20px;
-  background-color: #fff; 
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
-  border-radius: 8px; 
+  background-color: #fff; /* White background for the form */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft shadow around the form */
+  border-radius: 8px; /* Rounded corners */
+  positon: absolute;
 }
 
 #create-account-title {
   text-align: center;
-  font-size: 24px; 
-  color: #333; 
-  margin-bottom: 20px; 
+  font-size: 24px; /* Large font size for the title */
+  color: #333; /* Dark grey color for the text */
+  margin-bottom: 20px; /* Space below the title */
 }
 
 
 #create-account-form {
   display: flex;
   flex-direction: column;
-  gap: 15px; 
+  gap: 15px; /* Space between form items */
   background-color: white;
   justify-content: center;
   align-items: center;
 }
 
 .form-section {
+  /* Your styles for each form section */
 }
 
 .form-group {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Stack labels on top of inputs */
 }
 
-
+.form-input {
+  font-size: 16px; /* Larger font size for readability */
+  padding: 10px; /* Padding inside the inputs */
+  margin-bottom: 10px; /* Space below each input */
+  border: 1px solid #ccc; /* Light grey border */
+  border-radius: 4px; /* Slightly rounded borders for the inputs */
+}
 
 #create-account-button {
-  background-color: #09b6fe; 
-  color: white; 
-  padding: 15px 20px; 
-  font-size: 18px;
-  border: none; 
-  border-radius: 4px; 
-  cursor: pointer; 
-  margin-top: 10px;
+  background-color: #17a2b8; /* Teal background color for the button */
+  color: white; /* White text color */
+  padding: 15px 20px; /* Padding inside the button */
+  font-size: 18px; /* Larger font size for the button text */
+  border: none; /* No border for the button */
+  border-radius: 4px; /* Rounded corners for the button */
+  cursor: pointer; /* Cursor to indicate it's clickable */
+  margin-top: 10px; /* Space above the button */
 }
 
-#validation-errors {
-  color: red; 
-  font-size: 14px; 
-  margin-top: 5px; 
-  display:flex;
-  flex-direction: column;
-  position: center;
-
+#validation-errors .error-message {
+  color: red; /* Red color for error messages */
+  font-size: 14px; /* Smaller font size for error messages */
+  margin-top: 5px; /* Space above error messages */
+  align: center;
 }
