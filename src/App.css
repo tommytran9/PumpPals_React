@@ -178,7 +178,6 @@ ody, html {
   margin: 1rem;
   padding: 1rem;
   border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 #user-post-bar {
@@ -189,7 +188,6 @@ ody, html {
   margin: 1rem;
   padding: 1rem;
   border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 #user-workout-bar {
@@ -200,7 +198,6 @@ ody, html {
   margin: 1rem;
   padding: 1rem;
   border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .pfp {

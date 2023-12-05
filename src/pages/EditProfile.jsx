@@ -4,6 +4,7 @@ import {
   uploadProfilePicture,
   getUsername,
   getUserByUsername,
+  getProfilePicture,
   updateUser,
 } from "../Util/ServerConnector.js";
 
@@ -19,6 +20,14 @@ const EditProfile = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    const fetchProfilePicture = async () => {
+      let imageUrl = await getProfilePicture(username);
+      if (imageUrl === null) {
+        imageUrl = process.env.PUBLIC_URL + "/account_icon.svg";
+      }
+      setProfilePicture(imageUrl);
+    };
+
     const fetchData = async () => {
       const response = await getUsername();
       const username = response.data;
@@ -33,6 +42,7 @@ const EditProfile = () => {
       setFitnessGoals(user.fitnessGoals);
     };
 
+    fetchProfilePicture();
     fetchData();
   }, []);
 
@@ -71,14 +81,12 @@ const EditProfile = () => {
     }
   };
 
-
   return (
     <div className="edit-profile-container">
-      <aside className="sidebar">
-        {/* Profile Picture and any other profile related information */}
-        <img src={profilePicture || 'default-profile.png'} alt="Profile" className="profile-picture" />
-        {/* Possibly add username or other details here */}
-      </aside>
+    <aside className="profile">
+      <img src={profilePicture || 'default-profile.png'} alt="User" className="profile-picture" />
+      <h2>{name || 'Profile Name'}</h2> {/* Display the name, or a placeholder if not set */}
+    </aside>
       <div className="edit-form">
         <h1>Edit Profile</h1>
         {errorMessage && <p className="error-message">{errorMessage.message}</p>}

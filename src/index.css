@@ -255,3 +255,80 @@ form {
 
 
 
+.edit-profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+  gap: 2rem; /* Adds space between the profile section and the form */
+  background-color: #f8f8f8; /* Background color of the whole page */
+}
+
+.profile {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Centering the content inside the aside */
+  width: 20%; /* Adjust the width of the sidebar */
+}
+
+.profile-picture {
+  border-radius: 50%;
+  width: 50%; /* Adjust the size as needed */
+  margin-bottom: 1rem; /* Adds space below the image */
+}
+
+.edit-form {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 70%; /* Adjust the width of the form */
+  text-align: center; /* Aligns the text to the left */
+}
+
+.edit-form h1 {
+  margin-bottom: 1rem; /* Adds space below the header */
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 1rem; /* Adds space below the error message */
+}
+
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns of equal width */
+  gap: 1rem; /* Space between grid items */
+  align-items: center; /* Aligns items vertically */
+}
+
+.info label {
+  display: block;
+  margin-bottom: 0.5rem; /* Adds space below the label */
+}
+
+.info input[type="file"],
+.info input[type="text"],
+.info input[type="date"],
+.info input[type="number"],
+.info select,
+.info textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem; /* Adds space below the input */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.info button {
+  grid-column: 1 / -1; /* Button spans across all columns */
+  padding: 0.5rem 1rem;
+  background-color: ##09b6fe;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem; /* Adds space above the button */
+}
