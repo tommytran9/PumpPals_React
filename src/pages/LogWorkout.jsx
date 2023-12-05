@@ -143,7 +143,7 @@ const LogWorkout = () => {
             Add Exercise
           </button>
           <button type="button" onClick={handleCreateWorkout}>
-            Log Workout
+            Log Your Lift!
           </button>
         </div>
       </form>
