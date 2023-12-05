@@ -10,7 +10,7 @@ const LogWorkout = () => {
   const [workouts, setWorkouts] = useState([]);
   const [newWorkout, setNewWorkout] = useState({
     name: "",
-    exercises: [],
+    exercises: [{ name: "", weight: "", sets: "", reps: "" }],
   });
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -32,7 +32,8 @@ const LogWorkout = () => {
   const handleCreateWorkout = async () => {
     try {
       // Check if any field is empty
-      if (newWorkout.exercises.some(
+      if (
+        newWorkout.exercises.some(
           (exercise) =>
             exercise.name === "" ||
             exercise.weight === "" ||
@@ -88,64 +89,64 @@ const LogWorkout = () => {
     <div className="log-workout-container">
       <h1>Log Workout</h1>
       <form>
-        <div className="exercise-list">
-          {newWorkout.exercises.map((exercise, index) => (
-            <div key={index} className="exercise-item">
-              <div>
-                <label>
-                  Exercise Name:
+        <table>
+          <thead>
+            <tr>
+              <th>Exercise Name</th>
+              <th>Weight</th>
+              <th>Sets</th>
+              <th>Reps</th>
+            </tr>
+          </thead>
+          <tbody>
+            {newWorkout.exercises.map((exercise, index) => (
+              <tr key={index}>
+                <td>
                   <input
                     type="text"
                     name="name"
                     value={exercise.name}
                     onChange={(e) => handleExerciseInputChange(e, index)}
                   />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Weight:
+                </td>
+                <td>
                   <input
                     type="text"
                     name="weight"
                     value={exercise.weight}
                     onChange={(e) => handleExerciseInputChange(e, index)}
                   />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Sets:
+                </td>
+                <td>
                   <input
                     type="text"
                     name="sets"
                     value={exercise.sets}
                     onChange={(e) => handleExerciseInputChange(e, index)}
                   />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Reps:
+                </td>
+                <td>
                   <input
                     type="text"
                     name="reps"
                     value={exercise.reps}
                     onChange={(e) => handleExerciseInputChange(e, index)}
                   />
-                </label>
-              </div>
-            </div>
-          ))}
-        </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         {errorMessage && <p>{errorMessage}</p>} {/* Display error message */}
-        <button type="button" onClick={handleAddExercise}>
-          Add Exercise
-        </button>
-        <button type="button" onClick={handleCreateWorkout}>
-          Log Workout
-        </button>
-      </form>{" "}
+        <div className="button-container">
+          <button type="button" onClick={handleAddExercise}>
+            Add Exercise
+          </button>
+          <button type="button" onClick={handleCreateWorkout}>
+            Log Workout
+          </button>
+        </div>
+      </form>
       <div className="workout-card">
         <h1>Recent Workouts:</h1>
         {workouts
@@ -161,4 +162,5 @@ const LogWorkout = () => {
     </div>
   );
 };
+
 export default LogWorkout;

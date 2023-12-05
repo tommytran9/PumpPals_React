@@ -380,3 +380,79 @@ a:hover {
   font-size: 1em; /* Set font size */
   margin-bottom: 10px; /* Add some margin at the bottom */
 }
+
+.log-workout-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.log-workout-container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.log-workout-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.exercise-list {
+  margin-bottom: 20px;
+}
+
+.exercise-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.exercise-item label {
+  margin-bottom: 10px;
+}
+
+.exercise-item input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  font-weight: bold;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
