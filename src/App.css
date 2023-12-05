@@ -1,3 +1,8 @@
+ody, html {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
 .App {
   text-align: center;
 }
@@ -153,8 +158,6 @@
   background: #FFF0;
   margin: 1rem;
   padding: 1rem;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 #profile-post-bar {
@@ -164,8 +167,6 @@
   background: #FFF0;
   margin: 1rem;
   padding: 1rem;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 #user-user-bar {
@@ -206,11 +207,13 @@
   border-radius: 50%;
   height: 75px;
   width: 75px;
+  margin-right: 10px;
 }
 
 .msg {
   text-align: justify;
   margin: 2rem;
+  text-align: left;
 }
 
 #like:hover {
@@ -219,24 +222,27 @@
 
 .button-container {
   display: flex;
-  justify-content: space-between;
-}
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #fff;
+  color: black;}
 
 .btn {
   border: none;
-  color: #fff;
+  color: #000;
   font-size: 0.8rem;
   display: flex;
   align-items: center;
-  gap: 6px;
-  background-color: #bdc0c5;
+  gap: 4px;
+  background-color: #fff0;
   border-radius: 4px;
-  padding: 6px 15px;
+  padding: 8px 15px;
   margin: 0 10px;
 }
 
 .like-active {
   background-color: #09b6fe;
+  color: black;
 }
 
 .exercise-list {
@@ -288,21 +294,16 @@ a:hover {
   text-decoration: underline; /* Add a hover effect to all links */
 }
 
-.comment-box {
-  width: 100%; /* Full width */
-  padding: 10px; /* Some padding */
-  border: 1px solid #ddd; /* A light border */
-  border-radius: 4px; /* Rounded corners */
-  margin-bottom: 10px; /* Some space below the box */
-}
 
 .comment-button {
   background-color: #09b6fe; /* A nice blue color */
   color: white; /* White text */
   border: none; /* No border */
-  border-radius: 4px; /* Rounded corners */
-  padding: 10px 20px; /* Some padding */
+  border-radius: 18px; /* Rounded corners */
+  padding: 8px 16px; /* Some padding */
   cursor: pointer; /* Change cursor to pointer when hovering over the button */
+  margin-top: 10px;
+  font-size: 14px;
 }
 
 .comment-button:hover {
@@ -310,7 +311,7 @@ a:hover {
 }
 
 .comment-container {
-  display: flex; /* Align children in a row */
+  display: flow-root; /* Align children in a row */
   justify-content: space-between; /* Space between the name and the comment */
   align-items: center; /* Center align vertically */
   padding: 10px 0; /* Some padding top and bottom */
@@ -318,12 +319,15 @@ a:hover {
 }
 
 .commenter {
+  display: flow-root list-item;
+  text-align: left;
   font-weight: bold; /* Make the name bold */
   flex: 1; /* Take up remaining space */
 }
 
 .comment {
   flex: 3; /* Take up remaining space */
+  text-align: left;
 }
 
 .StatCard {
@@ -365,8 +369,10 @@ a:hover {
 }
 
 .comment-container {
-  display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eaeaea;
 }
 
 .comment-box {
@@ -374,7 +380,7 @@ a:hover {
   padding: 15px; /* Some padding */
   box-sizing: border-box; /* Make sure padding doesn't increase the total width */
   border: 1px solid #ccc; /* Gray border */
-  border-radius: 4px; /* Rounded corners */
+  border-radius: 18px; /* Rounded corners */
   background-color: #f8f8f8; /* Light gray background */
   resize: vertical; /* Allow the user to resize the textarea vertically */
   font-size: 1em; /* Set font size */
@@ -432,7 +438,6 @@ button {
   cursor: pointer;
   border-radius: 5px;
   margin-right: 10px;
-  margin-top: 10px;
 }
 
 button:hover {
@@ -456,3 +461,64 @@ th, td {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
+
+
+/* Styles for the dropdown button */
+.navbar .dropdown-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  text-align: left;
+  text-align: center;
+}
+
+/* Styles for the dropdown menu container */
+.navbar .dropdown-menu {
+  display: none; /* Initially don't display the dropdown */
+  flex-direction: column;
+  position: absolute;
+  top: 100%; /* Position it below the dropdown button */
+  left: 0;
+  background-color: #333; 
+  min-width: 160px; /* Minimum width of the dropdown */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow effect */
+  border-radius: 4px; /* Rounded corners */
+  padding: 0.5rem 0; /* Padding inside the dropdown */
+}
+
+/* Styles for each dropdown item */            
+.navbar .dropdown-item {
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Hover state for dropdown items */
+.navbar .dropdown-item:hover {
+  background-color: #474747; /* Dark grey background for item hover */
+}
+
+/* Separator style */
+.navbar .dropdown-divider {
+  height: 1px;
+  margin: 0.5rem 0;
+  overflow: hidden;
+  background-color: #474747;
+}
+
+/* Display the dropdown menu when hovering over the dropdown button */
+.navbar li:hover > .dropdown-menu {
+  display: flex;
+}
+
+.navbar ul {
+  align-items: center;
+  position: relative; /* Needed for absolute positioning of dropdown */
+}
+

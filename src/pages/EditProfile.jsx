@@ -71,71 +71,79 @@ const EditProfile = () => {
     }
   };
 
+
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <h1>Edit Profile</h1>
-      {errorMessage && <p>{errorMessage.message}</p>} {/* Display the error message */}
-      <form onSubmit={handleFormSubmit}>
-        <div>
-          <label>Profile Picture</label> <br />
-          <label>Only .png, .jpg, and .jpeg are supported</label>
-          <input type="file" onChange={handleProfilePictureChange} />
-        </div>
-        <div>
-          <label>Bio:</label>
-          <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
-        </div>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Date of Birth:</label>
-          <input
-            type="date"
-            value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Gender:</label>
-          <select value={gender} onChange={(e) => setGender(e.target.value)}>
-            <option value="">Select</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-        <div>
-          <label>Height:</label>
-          <input
-            type="number"
-            value={height}
-            onChange={(e) => setHeight(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Weight:</label>
-          <input
-            type="number"
-            value={weight}
-            onChange={(e) => setWeight(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Fitness Goals:</label>
-          <textarea
-            value={fitnessGoals}
-            onChange={(e) => setFitnessGoals(e.target.value)}
-          />
-        </div>
-        <button type="submit">Save</button>
-      </form>
-    </div>
+    <div className="edit-profile-container">
+      <aside className="sidebar">
+        {/* Profile Picture and any other profile related information */}
+        <img src={profilePicture || 'default-profile.png'} alt="Profile" className="profile-picture" />
+        {/* Possibly add username or other details here */}
+      </aside>
+      <div className="edit-form">
+        <h1>Edit Profile</h1>
+        {errorMessage && <p className="error-message">{errorMessage.message}</p>}
+        <form class= "info"onSubmit={handleFormSubmit}>
+          <div>
+            <label>Profile Picture</label> <br />
+            <label>Only .png, .jpg, and .jpeg are supported</label>
+            <input type="file" onChange={handleProfilePictureChange} />
+          </div>
+          <div>
+            <label>Bio:</label>
+            <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
+          </div>
+          <div>
+            <label>Name:</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Date of Birth:</label>
+            <input
+              type="date"
+              value={dateOfBirth}
+              onChange={(e) => setDateOfBirth(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Gender:</label>
+            <select value={gender} onChange={(e) => setGender(e.target.value)}>
+              <option value="">Select</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label>Height:</label>
+            <input
+              type="number"
+              value={height}
+              onChange={(e) => setHeight(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Weight:</label>
+            <input
+              type="number"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+            />
+          </div>
+          <div>
+            <label>Fitness Goals:</label>
+            <textarea
+              value={fitnessGoals}
+              onChange={(e) => setFitnessGoals(e.target.value)}
+            />
+          </div>
+          <button type="submit">Save</button>
+        </form>
+      </div>
+    </div>  
   );
 };
 

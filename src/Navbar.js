@@ -6,6 +6,12 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
+  // State to manage dropdown visibility
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  // Function to toggle dropdown
+  const toggleDropdown = () => setShowDropdown(!showDropdown);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     setIsLoggedIn(!!token);
@@ -34,15 +40,22 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
       <ul>
         <CustomLink to="/forum">Forum</CustomLink>
         <CustomLink to="/about">About</CustomLink>
-        <CustomLink to="/profile">Profile</CustomLink>
         {isLoggedIn ? (
           <>
             <CustomLink to="/create-post">Create Post</CustomLink>
             <CustomLink to="/log-workout">Log Workout</CustomLink>
-            <CustomLink to="/logout" onClick={handleLogout}>
-              Logout
-            </CustomLink>
-          </>
+            <li style={{ position: 'relative' }} onMouseLeave={() => setShowDropdown(false)}>
+            <button onClick={toggleDropdown} className="dropdown-button">Account</button>
+            {showDropdown && (
+              <div className="dropdown-menu">
+                <CustomLink to="/profile" className="dropdown-item">Profile</CustomLink>
+                <CustomLink to="/logout" className="dropdown-item"onClick={handleLogout}>              
+                Logout
+                </CustomLink>
+              </div>
+            )}
+          </li>
+        </>
         ) : (
           <>
             <CustomLink to="/login">Login</CustomLink>
