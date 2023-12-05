@@ -119,7 +119,7 @@ const CreateAccount = ({ setIsLoggedIn }) => {
 
   return (
     <>
-      <div id='create-account-container' style={{ display: "flex", flexDirection: "column" }}>
+      <div id='create-account-container' >
         <h2 id='create-account-title'>Create Account</h2>
         <form onSubmit={handleSubmit} id='create-account-form'>
           <div className='form-section'>
@@ -132,6 +132,8 @@ const CreateAccount = ({ setIsLoggedIn }) => {
                   onChange={(e) => setUsername(e.target.value)}
                   className='form-input'
                 />
+               {validationErrors.username && <p className='error-message'>{validationErrors.username}</p>}
+ 
               </label>
             </div>
             <br /> {/* Add spacing */}
@@ -144,6 +146,7 @@ const CreateAccount = ({ setIsLoggedIn }) => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </label>
+              {validationErrors.password && <p className='error-message'>{validationErrors.password}</p>}
             </div>
           </div>
           <br /> {/* Add spacing */}
@@ -157,7 +160,7 @@ const CreateAccount = ({ setIsLoggedIn }) => {
                   onChange={(e) => setName(e.target.value)}
                 />
               </label>
-            </div>
+              {validationErrors.name && <p className='error-message'>{validationErrors.name}</p>}            </div>
             <br /> {/* Add spacing */}
             <div>
               <label>
@@ -286,7 +289,7 @@ const CreateAccount = ({ setIsLoggedIn }) => {
       </div>
       <div id='validation-errors'>
         {validationErrors.map((error, index) => (
-          <p key={index} style={{ color: "red" }} >
+          <p key={index} >
             {error}
           </p>
         ))}
