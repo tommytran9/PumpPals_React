@@ -11,7 +11,7 @@
   padding: 1rem;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  margin: 7vw;
+  margin: 2vw;
 }
 
 #WorkoutCardDiv {
@@ -23,7 +23,6 @@
   padding: 1rem;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  margin: 7vw;
 }
 
 #UserCard {
@@ -37,6 +36,21 @@
   padding: 1rem;
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#UserCard button {
+  background-color: #09b6fe; /* A nice blue color */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 20px; /* Some padding */
+  cursor: pointer; /* Change cursor to pointer when hovering over the button */
+  text-decoration: none; /* Remove underline from the text */
+  font-size: 1em; /* Set font size */
+}
+
+#UserCard button:hover {
+  background-color: #065b8e; /* A darker blue color when hovering */
 }
 
 .post-card-gen {
@@ -53,8 +67,22 @@
 }
 
 .user-card-gen {
-  margin: 2rem;
-  padding: 25px;
+  background: #FFF0;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.workout-card-gen {
+  background: #FFF0;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.post-card-gen {
   background: #FFF0;
   margin: 1rem;
   padding: 1rem;
@@ -105,8 +133,19 @@
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+#forum-workout-bar {
+  border: 1px white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #FFF0;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
 #profile-user-bar {
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   width: 30%;
@@ -119,10 +158,43 @@
 }
 
 #profile-post-bar {
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   width: 50%;
+  background: #FFF0;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#user-user-bar {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  align-items: center;
+  background: #FFF0;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#user-post-bar {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background: #FFF0;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#user-workout-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: #FFF0;
   margin: 1rem;
   padding: 1rem;
@@ -141,13 +213,13 @@
   margin: 2rem;
 }
 
-#like {
+#like:hover {
+  color:#065b8e;
+}
+
+.button-container {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  background-color: #fff;
-  padding: 30px 50px;
-  border-radius: 12px;
+  justify-content: space-between;
 }
 
 .btn {
@@ -214,4 +286,97 @@ a {
 
 a:hover {
   text-decoration: underline; /* Add a hover effect to all links */
+}
+
+.comment-box {
+  width: 100%; /* Full width */
+  padding: 10px; /* Some padding */
+  border: 1px solid #ddd; /* A light border */
+  border-radius: 4px; /* Rounded corners */
+  margin-bottom: 10px; /* Some space below the box */
+}
+
+.comment-button {
+  background-color: #09b6fe; /* A nice blue color */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 10px 20px; /* Some padding */
+  cursor: pointer; /* Change cursor to pointer when hovering over the button */
+}
+
+.comment-button:hover {
+  background-color: #065b8e; /* A darker blue color when hovering */
+}
+
+.comment-container {
+  display: flex; /* Align children in a row */
+  justify-content: space-between; /* Space between the name and the comment */
+  align-items: center; /* Center align vertically */
+  padding: 10px 0; /* Some padding top and bottom */
+  border-bottom: 1px solid #ddd; /* A light border at the bottom */
+}
+
+.commenter {
+  font-weight: bold; /* Make the name bold */
+  flex: 1; /* Take up remaining space */
+}
+
+.comment {
+  flex: 3; /* Take up remaining space */
+}
+
+.StatCard {
+  border: 1px solid #ddd; /* A light border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 20px; /* Some padding */
+  margin-bottom: 20px; /* Some space below the card */
+  background-color: #f9f9f9; /* A light background color */
+  width: 300px; /* Set a fixed width */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* A light shadow */
+}
+
+.StatCard table {
+  width: 100%; /* Full width */
+  border-collapse: collapse; /* Collapse borders */
+}
+
+.StatCard th, .StatCard td {
+  border: 1px solid #ddd; /* Add a border */
+  padding: 10px; /* Some padding */
+}
+
+.StatCard td:first-child {
+  font-weight: bold; /* Make the first column bold */
+  color : #09b6fe;
+}
+
+.follow-button {
+  background-color: #09b6fe; /* A nice blue color */
+}
+
+.following-button {
+  background-color: #065b8e; /* A darker blue color */
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-box {
+  width: 100%; /* Full width */
+  padding: 15px; /* Some padding */
+  box-sizing: border-box; /* Make sure padding doesn't increase the total width */
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #f8f8f8; /* Light gray background */
+  resize: vertical; /* Allow the user to resize the textarea vertically */
+  font-size: 1em; /* Set font size */
+  margin-bottom: 10px; /* Add some margin at the bottom */
 }

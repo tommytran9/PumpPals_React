@@ -22,23 +22,23 @@ function StatCard({ stat }) {
       <table>
         <tbody>
           <tr>
-            <td style={{ textAlign: "left" }}><strong>Age:</strong></td>
+            <td style={{ textAlign: "left" }}><strong>Age</strong></td>
             <td style={{ textAlign: "left" }}>{age}</td>
           </tr>
           <tr>
-            <td style={{ textAlign: "left" }}><strong>Gender:</strong></td>
+            <td style={{ textAlign: "left" }}><strong>Gender</strong></td>
             <td style={{ textAlign: "left" }}>{gender}</td>
           </tr>
           <tr>
-            <td style={{ textAlign: "left" }}><strong>Height:</strong></td>
+            <td style={{ textAlign: "left" }}><strong>Height</strong></td>
             <td style={{ textAlign: "left" }}>{height}</td>
           </tr>
           <tr>
-            <td style={{ textAlign: "left" }}><strong>Weight:</strong></td>
+            <td style={{ textAlign: "left" }}><strong>Weight</strong></td>
             <td style={{ textAlign: "left" }}>{weight}</td>
           </tr>
           <tr>
-            <td style={{ textAlign: "left" }}><strong>Fitness Goals:</strong></td>
+            <td style={{ textAlign: "left" }}><strong>Fitness Goals</strong></td>
             <td style={{ textAlign: "left" }}>{fitnessGoals.join(", ")}</td>
           </tr>
         </tbody>

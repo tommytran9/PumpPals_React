@@ -63,8 +63,11 @@ function UserCard({ userPost }) {
             <button>Edit Profile</button>
           </a>
         ) : (
-          <button onClick={handleFollow}>
-            {followed ? "following" : "follow"}
+          <button
+            onClick={handleFollow}
+            className={followed ? "following-button" : "follow-button"}
+          >
+            {followed ? "Following" : "Follow"}
           </button>
         )}
       </div>

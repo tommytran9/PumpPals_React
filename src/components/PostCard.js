@@ -111,19 +111,26 @@ function PostCard({ post }) {
           />
         </div>
       )}
-      <div className="msg">
+      <div className="post-content">
         <p>{content}</p>
       </div>
-      <div id="like">
-        <LikeButton />
-      </div>
-      <div id="comment">
+      <div className="comment-container">
         <textarea
           value={comment}
           onChange={handleCommentChange}
           placeholder="Enter your comment..."
+          className="comment-box"
         ></textarea>
-        <button onClick={handleCommentSubmit}>Comment</button>
+        <div className="button-container">
+          <div id="like">
+            <LikeButton />
+          </div>
+          <div id="comment">
+            <button className="comment-button" onClick={handleCommentSubmit}>
+              Comment
+            </button>
+          </div>
+        </div>
       </div>
       <div id="comments">
         {allComments.map((comment, index) => {
