@@ -32,7 +32,7 @@ function UserCard({ userPost }) {
     fetchProfilePicture();
     checkFollowStatus();
     checkCurrentUser();
-  }, []);
+  }, [username]); // Add username as a dependency
 
   const handleFollow = async () => {
     if (followed) {

@@ -19,46 +19,57 @@ const EditProfile = () => {
   const [fitnessGoals, setFitnessGoals] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  useEffect(() => {
-    const fetchProfilePicture = async () => {
+useEffect(() => {
+  const fetchProfilePicture = async () => {
+    const response = await getUsername();
+    const username = response.data;
+    let imageUrl = await getProfilePicture(username);
+    if (imageUrl === null) {
+      imageUrl = process.env.PUBLIC_URL + "/account_icon.svg";
+    }
+    setProfilePicture(imageUrl);
+  };
+
+  const fetchData = async () => {
+    const response = await getUsername();
+    const username = response.data;
+    const user = await getUserByUsername(username);
+    setProfilePicture(user.profilePicture);
+    setBio(user.bio);
+    setName(user.name);
+    setDateOfBirth(user.dateOfBirth);
+    setGender(user.gender);
+    setHeight(user.height);
+    setWeight(user.weight);
+    setFitnessGoals(user.fitnessGoals);
+  };
+
+  fetchProfilePicture();
+  fetchData();
+}, []);
+
+const handleProfilePictureChange = async (e) => {
+  const file = e.target.files[0]; // Get the selected file
+  if (file) {
+    // Create a blob URL and set it as the source for the image
+    setProfilePicture(URL.createObjectURL(file));
+
+    const result = await uploadProfilePicture(file); // Upload the file
+    if (result.success) {
+      console.log(result.response);
+      const response = await getUsername();
+      const username = response.data;
       let imageUrl = await getProfilePicture(username);
       if (imageUrl === null) {
         imageUrl = process.env.PUBLIC_URL + "/account_icon.svg";
       }
       setProfilePicture(imageUrl);
-    };
-
-    const fetchData = async () => {
-      const response = await getUsername();
-      const username = response.data;
-      const user = await getUserByUsername(username);
-      setProfilePicture(user.profilePicture);
-      setBio(user.bio);
-      setName(user.name);
-      setDateOfBirth(user.dateOfBirth);
-      setGender(user.gender);
-      setHeight(user.height);
-      setWeight(user.weight);
-      setFitnessGoals(user.fitnessGoals);
-    };
-
-    fetchProfilePicture();
-    fetchData();
-  }, []);
-
-  const handleProfilePictureChange = async (e) => {
-    const file = e.target.files[0]; // Get the selected file
-    if (file) {
-      const result = await uploadProfilePicture(file); // Upload the file
-      if (result.success) {
-        setProfilePicture(result.response); // Update the profile picture state variable
-        console.log(result.response);
-      } else {
-        console.log(result.response);
-        setErrorMessage(result.response); // Set the error message
-      }
+    } else {
+      console.log(result.response);
+      setErrorMessage(result.response); // Set the error message
     }
-  };
+  }
+};
   const navigate = useNavigate();
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -83,25 +94,46 @@ const EditProfile = () => {
 
   return (
     <div className="edit-profile-container">
-    <aside className="profile">
-      <img src={profilePicture || 'default-profile.png'} alt="User" className="profile-picture" />
-      <h2>{name || 'Profile Name'}</h2> {/* Display the name, or a placeholder if not set */}
-    </aside>
+      <aside className="profile">
+        <img
+          src={profilePicture || "default-profile.png"}
+          alt="User"
+          className="profile-picture"
+        />
+        <h2>{name || "Profile Name"}</h2>{" "}
+        {/* Display the name, or a placeholder if not set */}
+      </aside>
       <div className="edit-form">
         <h1>Edit Profile</h1>
-        {errorMessage && <p className="error-message">{errorMessage.message}</p>}
-        <form class= "info"onSubmit={handleFormSubmit}>
+        {errorMessage && (
+          <p className="error-message">{errorMessage.message}</p>
+        )}
+        <form class="info" onSubmit={handleFormSubmit}>
           <div>
-            <label>Profile Picture</label> <br />
+            <label>
+              <strong>Upload Profile Picture</strong>
+            </label>{" "}
+            <br />
             <label>Only .png, .jpg, and .jpeg are supported</label>
-            <input type="file" onChange={handleProfilePictureChange} />
+            <label htmlFor="file-upload" className="upload-button">
+              Upload Photo
+              <input
+                id="file-upload"
+                type="file"
+                onChange={handleProfilePictureChange}
+              />
+            </label>
           </div>
           <div>
-            <label>Bio:</label>
+            <label>
+              <strong>Bio</strong>
+            </label>
             <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
           </div>
           <div>
-            <label>Name:</label>
+            <label>
+              <strong>Name</strong>
+            </label>
             <input
               type="text"
               value={name}
@@ -109,7 +141,9 @@ const EditProfile = () => {
             />
           </div>
           <div>
-            <label>Date of Birth:</label>
+            <label>
+              <strong>Date of Birth</strong>
+            </label>
             <input
               type="date"
               value={dateOfBirth}
@@ -117,7 +151,9 @@ const EditProfile = () => {
             />
           </div>
           <div>
-            <label>Gender:</label>
+            <label>
+              <strong>Gender</strong>
+            </label>
             <select value={gender} onChange={(e) => setGender(e.target.value)}>
               <option value="">Select</option>
               <option value="male">Male</option>
@@ -126,7 +162,9 @@ const EditProfile = () => {
             </select>
           </div>
           <div>
-            <label>Height:</label>
+            <label>
+              <strong>Height</strong>
+            </label>
             <input
               type="number"
               value={height}
@@ -134,7 +172,9 @@ const EditProfile = () => {
             />
           </div>
           <div>
-            <label>Weight:</label>
+            <label>
+              <strong>Weight</strong>
+            </label>
             <input
               type="number"
               value={weight}
@@ -142,7 +182,11 @@ const EditProfile = () => {
             />
           </div>
           <div>
-            <label>Fitness Goals:</label>
+            <label>
+              <strong>
+                <strong>Fitness Goals</strong>
+              </strong>
+            </label>
             <textarea
               value={fitnessGoals}
               onChange={(e) => setFitnessGoals(e.target.value)}
@@ -151,7 +195,7 @@ const EditProfile = () => {
           <button type="submit">Save</button>
         </form>
       </div>
-    </div>  
+    </div>
   );
 };
 

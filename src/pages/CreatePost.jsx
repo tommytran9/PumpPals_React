@@ -6,6 +6,7 @@ function CreatePost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [picture, setPicture] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
   const navigate = useNavigate();
 
   const handleCreatePost = async () => {
@@ -34,7 +35,7 @@ function CreatePost() {
       }
 
       console.log("Post created:", createdPost);
-      navigate("/");
+      navigate("/profile");
       // Handle success, e.g., redirect to post details page
     } catch (error) {
       console.error("Failed to create post:", error);
@@ -44,6 +45,9 @@ function CreatePost() {
 
   const handlePictureChange = (e) => {
     setPicture(e.target.files[0]);
+    if (e.target.files[0]) {
+      setImageURL(URL.createObjectURL(e.target.files[0]));
+    }
   };
 
   return (
@@ -54,14 +58,22 @@ function CreatePost() {
         placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        className="input-title"
       />
       <textarea
         placeholder="Content"
         value={content}
         onChange={(e) => setContent(e.target.value)}
+        className="textarea-content"
       ></textarea>
-      <input type="file" onChange={handlePictureChange} />
-      <button onClick={handleCreatePost}>Create</button>
+      {imageURL && <img src={imageURL} alt="Preview" className="upload-img" />}
+      <label htmlFor="file-upload" className="upload-button">
+        Upload Photo
+        <input id="file-upload" type="file" onChange={handlePictureChange} />
+      </label>
+      <button onClick={handleCreatePost} className="create-button">
+        Create
+      </button>
     </div>
   );
 }
