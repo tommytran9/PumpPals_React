@@ -138,11 +138,19 @@ const LogWorkout = () => {
           </tbody>
         </table>
         {errorMessage && <p>{errorMessage}</p>} {/* Display error message */}
-        <div className="button-container">
-          <button type="button" onClick={handleAddExercise}>
+        <div className="log-button-container">
+          <button
+            type="button"
+            onClick={handleAddExercise}
+            className="create-button"
+          >
             Add Exercise
           </button>
-          <button type="button" onClick={handleCreateWorkout}>
+          <button
+            type="button"
+            onClick={handleCreateWorkout}
+            className="create-button"
+          >
             Log Your Lift!
           </button>
         </div>

@@ -162,9 +162,9 @@ form {
 }
 
 #modalButtons button:last-of-type {
-  background-color: transparent;
+  background-color: #f2fbff;
   color: #09b6fe;
-  padding: 5px 0;
+  padding: 10px 20px;
 }
 
 
@@ -325,7 +325,7 @@ form {
 .info button {
   grid-column: 1 / -1; /* Button spans across all columns */
   padding: 0.5rem 1rem;
-  background-color: ##09b6fe;
+  background-color: #09b6fe;
   color: #ffffff;
   border: none;
   border-radius: 4px;

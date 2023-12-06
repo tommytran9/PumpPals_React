@@ -15,7 +15,6 @@ const CreateAccount = ({ setIsLoggedIn }) => {
   const [validationErrors, setValidationErrors] = useState([]);
   const navigate = useNavigate();
 
-
   const validateForm = () => {
     const errors = [];
 
@@ -119,18 +118,21 @@ const CreateAccount = ({ setIsLoggedIn }) => {
 
   return (
     <>
-      <div id='create-account-container' style={{ display: "flex", flexDirection: "column" }}>
-        <h2 id='create-account-title'>Create Account</h2>
-        <form onSubmit={handleSubmit} id='create-account-form'>
-          <div className='form-section'>
-            <div className='form-group'>
+      <div
+        id="create-account-container"
+        style={{ display: "flex", flexDirection: "column" }}
+      >
+        <h2 id="create-account-title">Create Account</h2>
+        <form onSubmit={handleSubmit} id="create-account-form">
+          <div className="form-section">
+            <div className="form-group">
               <label>
                 Username:
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className='form-input'
+                  className="form-input"
                 />
               </label>
             </div>
@@ -281,12 +283,14 @@ const CreateAccount = ({ setIsLoggedIn }) => {
             </div>
           </div>
           <br /> {/* Add spacing */}
-          <button type="submit" id='create-account-button'>Create Account</button>
+          <button type="submit" id="create-account-button">
+            Create Account
+          </button>
         </form>
       </div>
-      <div id='validation-errors'>
+      <div id="validation-errors">
         {validationErrors.map((error, index) => (
-          <p key={index} style={{ color: "red" }} >
+          <p key={index} style={{ color: "red" }}>
             {error}
           </p>
         ))}

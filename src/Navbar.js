@@ -66,7 +66,7 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
       <form onSubmit={handleSearch} className="search-form">
         <input
           type="text"
-          placeholder="Search"
+          placeholder="Search Users"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="search-input"

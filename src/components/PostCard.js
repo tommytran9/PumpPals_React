@@ -5,11 +5,12 @@ import {
   unlikePost,
   getUsername,
   commentPost,
-  getPostPicture, // Added line
+  getPostPicture,
+  deletePost, // Added line
 } from "../Util/ServerConnector.js";
 import { Link, useNavigate } from "react-router-dom";
 
-function PostCard({ post }) {
+function PostCard({ post, posts, setPosts }) {
   const {
     pfp,
     name,
@@ -27,6 +28,8 @@ function PostCard({ post }) {
   const [user, setUser] = useState("");
   const [comment, setComment] = useState("");
   const [allComments, setAllComments] = useState([]);
+  const [isUser, setIsUser] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false); // Added line
 
   useEffect(() => {
     const newComments = comments.map((comment, i) => ({
@@ -50,10 +53,18 @@ function PostCard({ post }) {
       const user = response.data;
       setUser(user);
     };
+    const checkUser = async () => {
+      const response = await getUsername();
+      const user = response.data;
+      if (user === username) {
+        setIsUser(true);
+      }
+    };
 
     fetchUsername();
     fetchProfilePicture();
-  }, []);
+    checkUser();
+  }, [username]);
 
   const [postPicture, setPostPicture] = useState(null);
 
@@ -79,6 +90,10 @@ function PostCard({ post }) {
   };
 
   const handleCommentSubmit = () => {
+    if (comment.trim() === "") {
+      return; // Do not submit blank comments
+    }
+
     const newComment = {
       comment: comment,
       commenter: user,
@@ -88,82 +103,114 @@ function PostCard({ post }) {
     setComment("");
   };
 
+  const handleDeletePost = async () => {
+    try {
+      // Delete the post
+      await deletePost(postId);
+
+      // Remove the deleted post from the posts state
+      const updatedPosts = posts.filter((post) => post.id !== postId);
+      setPosts([...updatedPosts]);
+
+      // Set isDeleted to true
+      setIsDeleted(true);
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
+
   return (
     <div id="PostCardDiv">
-      <div className="post-bar">
-        <img src={profilePicture} className="pfp" alt="Profile Picture" />
-        <p>{name}</p>
-        <p>
-          <Link to={`/user/${username}`}>{username}</Link>
-        </p>
-        <p>{formattedDate}</p>
-      </div>
-      {hasPicture && (
-        <div
-          className="post-picture"
-          style={{ display: "flex", justifyContent: "center" }}
-        >
-          <img
-            src={postPicture}
-            alt="Post Picture"
-            className="post-picture-img"
-            style={{ maxWidth: "100%", maxHeight: "750px" }}
-          />
+      {isDeleted ? (
+        <h1>Post Deleted</h1>
+      ) : (
+        <div>
+          <div className="post-bar">
+            <img src={profilePicture} className="pfp" alt="Profile Picture" />
+            <p>{name}</p>
+            <p>
+              <Link to={`/user/${username}`}>{username}</Link>
+            </p>
+            <p>{formattedDate}</p>
+          </div>
+          {hasPicture && (
+            <div
+              className="post-picture"
+              style={{ display: "flex", justifyContent: "center" }}
+            >
+              <img
+                src={postPicture}
+                alt="Post Picture"
+                className="post-picture-img"
+                style={{ maxWidth: "100%", maxHeight: "750px" }}
+              />
+            </div>
+          )}
+          <div className="post-content">
+            <p>{content}</p>
+          </div>
+          <div className="comment-container">
+            <textarea
+              value={comment}
+              onChange={handleCommentChange}
+              placeholder="Enter your comment..."
+              className="comment-box"
+            ></textarea>
+            <div className="button-container">
+              <div id="like">
+                <LikeButton />
+              </div>
+              <div id="comment">
+                <button
+                  className="comment-button"
+                  onClick={handleCommentSubmit}
+                >
+                  Comment
+                </button>
+              </div>
+              {isUser && (
+                <div id="delete">
+                  <button className="delete-button" onClick={handleDeletePost}>
+                    Delete
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+          <div id="comments">
+            {allComments.map((comment, index) => {
+              let parsedComment;
+              try {
+                parsedComment = JSON.parse(comment.comment);
+              } catch (e) {
+                parsedComment = {
+                  comment: comment.comment,
+                  commenter: comment.commenter,
+                };
+              }
+              return (
+                <div key={index} className="comment-container">
+                  <div className="commenter">
+                    <p>
+                      <strong>
+                        <Link
+                          to={`/user/${parsedComment.commenter}`}
+                          key={parsedComment.commenter}
+                        >
+                          {parsedComment.commenter}
+                        </Link>
+                      </strong>
+                    </p>
+                  </div>
+                  <div className="comment">
+                    <p>{parsedComment.comment}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
-      <div className="post-content">
-        <p>{content}</p>
-      </div>
-      <div className="comment-container">
-        <textarea
-          value={comment}
-          onChange={handleCommentChange}
-          placeholder="Enter your comment..."
-          className="comment-box"
-        ></textarea>
-        <div className="button-container">
-          <div id="like">
-            <LikeButton />
-          </div>
-          <div id="comment">
-            <button className="comment-button" onClick={handleCommentSubmit}>
-              Comment
-            </button>
-          </div>
-        </div>
-      </div>
-      <div id="comments">
-        {allComments.map((comment, index) => {
-          let parsedComment;
-          try {
-            parsedComment = JSON.parse(comment.comment);
-          } catch (e) {
-            parsedComment = {
-              comment: comment.comment,
-              commenter: comment.commenter,
-            };
-          }
-          return (
-            <div key={index} className="comment-container">
-              <div className="commenter">
-                <p>
-                  <strong>
-                    <Link
-                      to={`/user/${parsedComment.commenter}`}
-                      key={parsedComment.commenter}
-                    >
-                      {parsedComment.commenter}
-                    </Link>
-                  </strong>
-                </p>
-              </div>
-              <div className="comment">
-                <p>{parsedComment.comment}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 

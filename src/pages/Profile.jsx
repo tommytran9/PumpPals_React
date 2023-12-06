@@ -43,12 +43,14 @@ function Profile() {
     fetchData();
   }, []);
 
-  function renderPost() {
-    if (!posts) {
-      return <p></p>;
-    }
-    return posts.map((post) => <PostCard post={post} />);
+function renderPost() {
+  if (!posts) {
+    return <p></p>;
   }
+  return posts.map((post) => (
+    <PostCard post={post} posts={posts} setPosts={setPosts} />
+  ));
+}
 
   function renderUser() {
     return user ? <UserCard userPost={user} /> : null; // Use user directly

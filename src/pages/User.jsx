@@ -18,16 +18,17 @@ function User() {
   const [user, setUser] = useState(null); // Initialize user as null
   const [loading, setLoading] = useState(true);
   const [workouts, setWorkouts] = useState([]);
+  const [foundUser, setFoundUser] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const isValid = await loginStillValid();
-      if (!isValid) {
-        navigate("/login");
-        return;
-      }
-
       const user = await getUserByUsername(username);
+      console.log(user);
+      if (user === null) {
+        setFoundUser(false);
+      } else {
+        setFoundUser(true);
+      }
       setUser(user);
 
       const userPosts = await getPostsByUsername(username);
@@ -40,7 +41,7 @@ function User() {
     };
 
     fetchData();
-  }, []);
+  }, [username]); // Remove user from the dependencies
 
   function renderWorkouts() {
     if (!workouts) {
@@ -66,6 +67,15 @@ function User() {
 
   if (loading) {
     return <p>Loading...</p>;
+  }
+
+  if (!foundUser) {
+    return (
+      <div>
+        <h1>User not found!</h1>
+        <p>Make sure you've entered the right username!</p>
+      </div>
+    );
   }
 
   return (

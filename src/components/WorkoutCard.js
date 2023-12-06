@@ -19,8 +19,10 @@ const WorkoutCard = ({ workout, isLogging }) => {
   return (
     <div id="WorkoutCardDiv">
     <div className="workout-card">
-      {!isLogging && <h3><a href={`/user/${username}`}>{name}</a></h3>}
-      <h3>{date}</h3>
+      {<h3><a href={`/user/${username}`}>{name}</a></h3>}
+      <div className="date">
+        <h3>{date}</h3>
+      </div>
       <table className="workout-table">
         <thead>
           <tr>
