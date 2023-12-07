@@ -14,9 +14,11 @@ function StatCard({ stat }) {
     const ageInYears = Math.floor(
       diffInMilliseconds / (1000 * 60 * 60 * 24 * 365.25)
     );
+
     setAge(ageInYears);
   }, [dateOfBirth]);
 
+  // BEGIN: be15d9bcejpp
   return (
     <div className="StatCard">
       <table>
@@ -27,11 +29,11 @@ function StatCard({ stat }) {
           </tr>
           <tr>
             <td style={{ textAlign: "left" }}><strong>Gender</strong></td>
-            <td style={{ textAlign: "left" }}>{gender}</td>
+            <td style={{ textAlign: "left" }}>{gender ? gender.charAt(0).toUpperCase() + gender.slice(1) : ''}</td>
           </tr>
           <tr>
             <td style={{ textAlign: "left" }}><strong>Height</strong></td>
-            <td style={{ textAlign: "left" }}>{height}</td>
+            <td style={{ textAlign: "left" }}>{height + "\""}</td>
           </tr>
           <tr>
             <td style={{ textAlign: "left" }}><strong>Weight</strong></td>

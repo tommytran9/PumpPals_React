@@ -23,6 +23,7 @@ function PostCard({ post, posts, setPosts }) {
     commenters,
     likers,
     hasPicture,
+    title,
   } = post;
   const [profilePicture, setProfilePicture] = useState(null);
   const [user, setUser] = useState("");
@@ -147,6 +148,7 @@ function PostCard({ post, posts, setPosts }) {
             </div>
           )}
           <div className="post-content">
+            <h4>{title}</h4>
             <p>{content}</p>
           </div>
           <div className="comment-container">
