@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getUserByUsername, getUsername } from "../Util/ServerConnector";
 
@@ -18,36 +19,42 @@ const WorkoutCard = ({ workout, isLogging }) => {
 
   return (
     <div id="WorkoutCardDiv">
-    <div className="workout-card">
-      {<h3><a href={`/user/${username}`}>{name}</a></h3>}
-      <div className="date">
-        <h3>{date}</h3>
+      <div className="workout-card">
+        {
+          <h3>
+            <Link to={`/user/${username}`}>{name}</Link>
+          </h3>
+        }
+        <div className="date">
+          <h3>{date}</h3>
+        </div>
+        <table className="workout-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Weight</th>
+              <th>Sets</th>
+              <th>Reps</th>
+            </tr>
+          </thead>
+          <tbody>
+            {exercises &&
+              exercises.map((exercise, index) => {
+                const { name, weight, sets, reps } = exercise;
+                return (
+                  <tr key={index}>
+                    <td>
+                      <strong>{name}</strong>
+                    </td>
+                    <td>{weight}</td>
+                    <td>{sets}</td>
+                    <td>{reps}</td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
       </div>
-      <table className="workout-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Weight</th>
-            <th>Sets</th>
-            <th>Reps</th>
-          </tr>
-        </thead>
-        <tbody>
-          {exercises &&
-            exercises.map((exercise, index) => {
-              const { name, weight, sets, reps } = exercise;
-              return (
-                <tr key={index}>
-                  <td><strong>{name}</strong></td>
-                  <td>{weight}</td>
-                  <td>{sets}</td>
-                  <td>{reps}</td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
-    </div>
     </div>
   );
 };

@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getUsername, getProfilePicture, followUser, unfollowUser, isFollowing } from "../Util/ServerConnector.js";
+import {
+  getUsername,
+  getProfilePicture,
+  followUser,
+  unfollowUser,
+  isFollowing,
+} from "../Util/ServerConnector.js";
 
 function UserCard({ userPost }) {
   const { name, username, bio, followers } = userPost;
@@ -26,6 +32,9 @@ function UserCard({ userPost }) {
       const user = response.data;
       if (user === username) {
         setIsCurrentUser(true);
+      }
+      else {
+        setIsCurrentUser(false);
       }
     };
 
@@ -59,9 +68,9 @@ function UserCard({ userPost }) {
       </div>
       <div>
         {isCurrentUser ? (
-          <a href="/edit-profile">
+          <Link to="/edit-profile">
             <button>Edit Profile</button>
-          </a>
+          </Link>
         ) : (
           <button
             onClick={handleFollow}

@@ -355,6 +355,7 @@ export async function commentPost(id, comment) {
     );
   } catch (error) {
     console.error("Failed to comment on post:", error);
+    return error;
   }
 }
 

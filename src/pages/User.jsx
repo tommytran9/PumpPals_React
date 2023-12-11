@@ -22,8 +22,8 @@ function User() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setPosts([]);
       const user = await getUserByUsername(username);
-      console.log(user);
       if (user === null) {
         setFoundUser(false);
       } else {
@@ -35,7 +35,7 @@ function User() {
       setPosts(userPosts);
 
       setLoading(false);
-
+      setWorkouts([]);
       const userWorkouts = await getWorkoutsByUsername(username);
       setWorkouts(userWorkouts);
     };
